@@ -1,0 +1,79 @@
+/* --- CUSTOMIZABLE VARIABLES --- */
+:root {
+    --bg-color: #0a0a0a;
+    --primary-text-color: #f0f0f0;
+    --secondary-text-color: #a0a0a0;
+    --accent-color: #2a7de1; /* A strong, techy blue */
+    --card-bg-color: #1a1a1a;
+    --font-family: 'Inter', sans-serif;
+}
+
+/* --- GLOBAL RESET & STYLES --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background-color: var(--bg-color); color: var(--primary-text-color); font-family: var(--font-family); line-height: 1.6; }
+main { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+section { padding: 6rem 0; }
+h1, h2, h3 { line-height: 1.2; color: var(--primary-text-color); font-weight: 700; }
+h1 { font-size: 3.5rem; }
+h2 { font-size: 2.5rem; margin-bottom: 2rem; }
+h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+p { color: var(--secondary-text-color); margin-bottom: 1rem; }
+a { color: var(--accent-color); text-decoration: none; transition: color 0.3s ease; }
+a:hover { color: var(--primary-text-color); }
+.button { display: inline-block; background-color: var(--accent-color); color: #ffffff; padding: 0.75rem 1.5rem; border-radius: 5px; font-weight: 500; transition: transform 0.3s ease, background-color 0.3s ease; }
+.button:hover { transform: translateY(-3px); background-color: #1e5ca1; color: #ffffff; }
+
+/* --- HEADER & NAV --- */
+header { position: sticky; top: 0; width: 100%; background-color: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 0; }
+nav { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-text-color); }
+.nav-links { list-style: none; display: flex; gap: 2rem; align-items: center; }
+.nav-links li a { color: var(--secondary-text-color); font-weight: 500; }
+.nav-links li a:hover, .nav-links li a.active { color: var(--primary-text-color); }
+.hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
+
+/* --- HERO SECTION --- */
+.hero { text-align: center; padding: 8rem 0; }
+.hero h1 { margin-bottom: 1rem; }
+.hero h2 { font-size: 1.75rem; font-weight: 400; color: var(--secondary-text-color); max-width: 700px; margin: 0 auto 2rem auto; }
+.hero .intro { max-width: 600px; margin: 0 auto 2rem auto; color: var(--primary-text-color); }
+.social-links a { font-size: 2rem; margin: 0 1rem; color: var(--secondary-text-color); }
+
+/* --- WORK SECTION --- */
+.work h2 { text-align: center; }
+.project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+.project-card { background-color: var(--card-bg-color); border: 1px solid #2a2a2a; border-radius: 8px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; padding: 1.5rem; display: flex; flex-direction: column; }
+.project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+.project-card img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; margin-bottom: 1rem; border-radius: 5px; }
+.project-card h3 { color: var(--primary-text-color); }
+.project-card p { flex-grow: 1; }
+
+/* --- STYLES FOR YOUR 'COMING SOON' CARD --- */
+.project-card.coming-soon { opacity: 0.6; }
+.project-card.coming-soon:hover { transform: none; box-shadow: none; cursor: default; }
+.project-card .button.disabled { background-color: #444; color: #888; cursor: not-allowed; }
+.project-card .button.disabled:hover { transform: none; background-color: #444; }
+
+/* --- ABOUT SECTION --- */
+.about-container { display: flex; align-items: flex-start; gap: 3rem; }
+.profile-pic { width: 250px; height: 250px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent-color); }
+.about-text { flex: 1; }
+.skills span { display: inline-block; background-color: var(--card-bg-color); padding: 0.5rem 1rem; border-radius: 5px; margin: 0.25rem; font-size: 0.9rem; border: 1px solid #2a2a2a; }
+
+/* --- FOOTER --- */
+footer { text-align: center; background-color: var(--card-bg-color); padding: 4rem 2rem; }
+footer h2 { font-size: 2rem; }
+footer .button { font-size: 1.2rem; margin: 2rem 0; }
+.footer-social a { font-size: 1.5rem; margin: 0 0.75rem; }
+.copyright { margin-top: 2rem; font-size: 0.9rem; color: var(--secondary-text-color); }
+
+/* --- RESPONSIVE DESIGN (MOBILE) --- */
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    .nav-links { position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; background-color: var(--card-bg-color); flex-direction: column; justify-content: center; gap: 3rem; transition: right 0.5s ease-in-out; }
+    .nav-links.nav-active { right: 0; }
+    .hamburger { display: block; }
+    .about-container { flex-direction: column; align-items: center; text-align: center; }
+}
