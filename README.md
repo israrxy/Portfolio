@@ -20,7 +20,7 @@ I'm a **16-year-old developer** passionate about using **AI** to build innovativ
 - 💡 More to come...
 
 ## 📫 Contact Me
-- Linkedin [Md Israr Ahamed](https://www.youtube.com/@HackmobiGamerz)
+- Linkedin [Md Israr Ahamed](https://linkedin.com/in/md-israr-ahamed)
 - Instagram: [@israrxy](https://instagram.com/israrxy)
 - Email: `info@titled.site` *(replace with yours)*
 
