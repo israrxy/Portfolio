@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Support My Work</title>
+  <!-- Modern Fonts and Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+        --bg-color: #121212;
+        --primary-color: #1e1e1e;
+        --accent-color: #00bfff;
+        --text-color: #e0e0e0;
+        --heading-color: #ffffff;
+        --error-color: #f44336;
+        --subtle-border: #2a2a2a;
+    }
+
+    html, body {
+        height: 100%;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      /* Prevents body scroll, allowing internal scroll if needed */
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      background-color: var(--bg-color);
+    }
+
+    .main-content {
+        flex-grow: 1; /* Takes up all available space */
+        overflow-y: auto; /* Allows scrolling ONLY if content overflows */
+        padding: 2rem 1.5rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h2 {
+      font-family: 'Poppins', sans-serif;
+      color: var(--heading-color);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.8rem;
+    }
+
+    .subtitle {
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+        opacity: 0.7;
+    }
+
+    .qr-code {
+      width: 100%;
+      max-width: 180px; /* Slightly smaller for better fit */
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      border: 2px solid var(--subtle-border);
+    }
+    
+    .payment-options {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .presets {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 1.5rem;
+    }
+
+    .preset-btn {
+        background-color: #2a2a2a;
+        color: var(--text-color);
+        border: 1px solid #444;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        flex-grow: 1;
+    }
+
+    .preset-btn:hover {
+        background-color: #333;
+        border-color: #555;
+    }
+
+    .preset-btn.active {
+        background-color: var(--accent-color);
+        color: var(--heading-color);
+        border-color: var(--accent-color);
+    }
+    
+    /* Wrapper for the input field and rupee sign */
+    .input-wrapper {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+
+    .rupee-sign {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-color);
+        opacity: 0.5;
+    }
+
+    .amount-input {
+      background-color: #2a2a2a;
+      color: var(--text-color);
+      border: 1px solid #444;
+      border-radius: 8px;
+      width: 100%;
+      font-size: 1.2rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      text-align: center;
+      box-sizing: border-box;
+      /* Make space for the rupee sign */
+      padding: 14px 14px 14px 35px;
+    }
+
+    .amount-input:focus {
+        outline: none;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.2);
+    }
+    
+    .error-message {
+      color: var(--error-color);
+      font-size: 0.9rem;
+      height: 1.2em;
+      margin-top: -0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    /* The fixed bottom bar for the button */
+    .action-bar {
+        padding: 1rem 1.5rem;
+        background-color: var(--bg-color);
+        box-shadow: 0 -4px 12px rgba(0,0,0,0.2); /* Shadow on top for depth */
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .btn {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 16px 20px;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .btn:hover {
+      background-color: #00a0d1;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 191, 255, 0.2);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="main-content">
+      <h2>Support with a Coffee ☕</h2>
+      <p class="subtitle">Scan to pay directly</p>
+      <img src="images/scan.png" alt="Scan QR to pay" class="qr-code" />
+
+      <div class="payment-options">
+        <div class="presets">
+          <!-- UPDATED THIS SECTION -->
+          <button class="preset-btn" data-amount="10">₹10</button>
+          <button class="preset-btn" data-amount="30">₹30</button>
+          <button class="preset-btn" data-amount="50">₹50</button>
+          <!-- END OF UPDATE -->
+        </div>
+
+        <div class="input-wrapper">
+          <span class="rupee-sign">₹</span>
+          <input type="number" id="amount-input" class="amount-input" placeholder="Or enter custom amount" min="10" />
+        </div>
+        <div id="error-message" class="error-message"></div>
+      </div>
+    </div>
+    
+    <div class="action-bar">
+        <button id="pay-button" class="btn">Pay Now</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const amountInput = document.getElementById('amount-input');
+        const payButton = document.getElementById('pay-button');
+        const errorMessage = document.getElementById('error-message');
+        const presetButtons = document.querySelectorAll('.preset-btn');
+        
+        // Function to handle payment
+        function pay() {
+            const amount = amountInput.value;
+            if (!amount || amount < 10) {
+                errorMessage.textContent = "Please enter ₹10 or more.";
+                return;
+            }
+            errorMessage.textContent = "";
+            const upiLink = `upi://pay?pa=notisrarxy@oksbi&pn=Md%20Israr%20Ahamed&am=${amount}&cu=INR`;
+            window.location.href = upiLink;
+        }
+
+        payButton.addEventListener('click', pay);
+
+        presetButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                presetButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                amountInput.value = button.dataset.amount;
+                errorMessage.textContent = "";
+            });
+        });
+
+        amountInput.addEventListener('input', () => {
+            presetButtons.forEach(btn => btn.classList.remove('active'));
+        });
+    });
+  </script>
+</body>
+</html>
