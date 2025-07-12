@@ -16,18 +16,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
     <link rel="manifest" href="/icon/site.webmanifest">
     <style>
-        @property --angle {
-          syntax: '<angle>';
-          initial-value: 0deg;
-          inherits: false;
-        }
-
         :root {
             --bg-color: #121212;
-            --primary-color: #1d1d1d;
+            --primary-color: #1d1d1d; /* Inner button background */
             --secondary-color: #2a2a2a;
-            --accent-color: #00bfff; /* Deep Sky Blue - Main theme color */
-            --glow-color: #00bfff;   /* Glow color for the button */
+            --accent-color: #00bfff;   /* Main theme blue */
+            --light-blue: #00e0ff;    /* Lighter blue for gradient */
+            --dark-blue: #0077ff;     /* Darker blue for gradient */
             --text-color: #e0e0e0;
             --heading-color: #ffffff;
         }
@@ -101,64 +96,75 @@
             font-size: 1.1rem;
         }
 
-        /* --- Animated Gradient Border Button --- */
-        .btn-animated-border {
+        /* --- Moving Gradient Border Button (Based on your example) --- */
+        .btn-gradient-border {
             position: relative;
-            display: inline-flex; /* Use inline-flex for content alignment */
-            align-items: center;
-            justify-content: center;
+            display: inline-block;
             padding: 15px 35px;
             margin: 15px 0 30px;
-            border: 2px solid transparent; /* The border is created by the pseudo-element */
-            background-color: var(--primary-color);
             color: var(--heading-color);
-            text-decoration: none;
+            background: transparent; /* The link itself has no background */
+            border: none;
+            cursor: pointer;
             font-family: 'Poppins', sans-serif;
             font-size: 1.1rem;
             font-weight: 600;
             letter-spacing: 1px;
-            border-radius: 25px; /* Control corner roundness */
-            overflow: hidden; /* Hide the parts of the gradient outside the border */
+            text-decoration: none;
+            z-index: 0;
+            overflow: hidden;
+            border-radius: 12px;
             transition: color 0.4s ease;
         }
-        
-        /* The moving gradient border */
-        .btn-animated-border::before {
-            content: '';
+
+        /* This is the moving gradient that creates the border */
+        .btn-gradient-border::before {
+            content: "";
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: calc(100% + 100px); /* Make it larger to ensure a smooth rotation */
-            height: calc(100% + 100px);
-            background-image: conic-gradient(
-                transparent, 
-                transparent, 
-                transparent, 
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(
+                120deg,
+                var(--accent-color),
+                var(--dark-blue),
+                var(--light-blue),
                 var(--accent-color)
             );
+            background-size: 300% 300%;
             z-index: -1;
-            transform: translate(-50%, -50%) rotate(var(--angle));
-            animation: rotate-gradient 4s linear infinite; /* Animation controls the rotation */
+            animation: borderMove 4s linear infinite;
+            border-radius: 14px; /* Slightly larger than button's radius */
+        }
+
+        /* This creates the dark background inside the border */
+        .btn-gradient-border::after {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            background: var(--primary-color);
+            z-index: -1;
+            border-radius: 10px; /* Slightly smaller than button's radius */
         }
         
-        /* The inner background to cover the gradient */
-        .btn-animated-border::after {
-            content: '';
-            position: absolute;
-            z-index: -1;
-            inset: 2px; /* This creates the thin border */
-            background-color: var(--primary-color);
-            border-radius: 23px; /* border-radius - inset */
-        }
-
-        @keyframes rotate-gradient {
-            from { --angle: 0deg; }
-            to { --angle: 360deg; }
-        }
-
-        .btn-animated-border:hover {
+        .btn-gradient-border:hover {
             color: var(--accent-color);
-            filter: drop-shadow(0 0 0.5rem var(--glow-color));
+        }
+
+        @keyframes borderMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         /* --- Social Links --- */
@@ -624,8 +630,8 @@
         <p class="subtitle">Developer from West Bengal, India</p>
         <p>I'm a 16-year-old developer specializing in using AI to build innovative Android, Windows, and Web applications.</p>
         
-        <!-- Animated Gradient Border Button -->
-        <a href="appstore" class="btn-animated-border">My Appstore</a>
+        <!-- Moving Gradient Border Button -->
+        <a href="appstore" class="btn-gradient-border">My Appstore</a>
 
         <div class="social-links">
             <a href="https://github.com/israrxy" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
