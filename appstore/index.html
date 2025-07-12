@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md Israr Ahamed's Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --text-color: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.25);
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+        .store-container { max-width: 600px; margin: 0 auto; }
+        .store-header { text-align: center; margin-bottom: 40px; }
+        .profile-pic { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--text-color); margin-bottom: 15px; }
+        h1 { font-size: 2.2em; margin: 0; }
+        .app-list { display: flex; flex-direction: column; gap: 20px; }
+        .app-item-link { text-decoration: none; color: inherit; display: block; }
+        .app-item-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .app-item-link:hover .app-item-card {
+            transform: scale(1.03);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .app-icon { width: 65px; height: 65px; border-radius: 16px; flex-shrink: 0; }
+        .app-info h2 { margin: 0 0 4px 0; font-size: 1.5em; }
+        .app-info p { margin: 0; opacity: 0.8; }
+    </style>
+</head>
+<body>
+    <div class="store-container">
+        <header class="store-header">
+            <!-- Image path is correct for this file location -->
+            <img src="images/pfp.png" alt="Md Israr Ahamed" class="profile-pic">
+            <h1>My App Store</h1>
+        </header>
+
+        <main class="app-list">
+            <!-- App 1: Peacify -->
+            <!-- This link points to the index.html INSIDE the peacify folder -->
+            <a href="peacify/index.html" class="app-item-link">
+                <article class="app-item-card">
+                    <img src="images/pcy-icon.png" alt="Peacify Icon" class="app-icon">
+                    <div class="app-info">
+                        <h2>Peacify</h2>
+                        <p>Music Without Limits</p>
+                    </div>
+                </article>
+            </a>
+
+            <!-- To add a new app, create a new folder (e.g., "newapp") and copy this block -->
+            <!--
+            <a href="newapp/index.html" class="app-item-link">
+                <article class="app-item-card">
+                    <img src="images/newapp-icon.png" alt="New App Icon" class="app-icon">
+                    <div class="app-info">
+                        <h2>New App</h2>
+                        <p>A cool new project</p>
+                    </div>
+                </article>
+            </a>
+            -->
+        </main>
+    </div>
+</body>
+</html>
