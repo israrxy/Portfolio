@@ -36,6 +36,10 @@
             -webkit-touch-callout: none;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
@@ -49,6 +53,74 @@
             margin: 0 auto;
             padding: 0 20px;
         }
+        
+        /* --- Navigation Menu --- */
+        #menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 40px;
+            height: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            z-index: 1001;
+            background: transparent;
+            border: none;
+        }
+        #menu-toggle span {
+            width: 100%;
+            height: 4px;
+            background-color: var(--heading-color);
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        #main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100%;
+            background-color: var(--primary-color);
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            flex-direction: column;
+            padding-top: 80px; /* Space for close button */
+        }
+        #main-nav.is-open {
+            transform: translateX(0);
+        }
+        #nav-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2.5rem;
+            color: var(--heading-color);
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .nav-links {
+            list-style: none;
+        }
+        .nav-links li a {
+            display: block;
+            padding: 20px 30px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--heading-color);
+            text-decoration: none;
+            transition: color 0.3s, background-color 0.3s;
+        }
+        .nav-links li a:hover {
+            color: var(--accent-color);
+            background-color: var(--secondary-color);
+        }
+
 
         /* --- Header & Hero Section --- */
         .hero {
@@ -58,7 +130,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 80vh;
+            min-height: 100vh; /* Changed to 100vh for better hero feel */
         }
 
         .hero-image {
@@ -611,7 +683,6 @@
             }
             .hero {
                 padding: 60px 0 0;
-                min-height: auto;
             }
             .section {
                 padding: 60px 0;
@@ -623,9 +694,25 @@
     </style>
 </head>
 <body>
+    
+    <!-- Navigation Menu -->
+    <button id="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <nav id="main-nav">
+        <button id="nav-close-btn">×</button>
+        <ul class="nav-links">
+            <li><a href="#home" id="nav-home">Home</a></li>
+            <li><a href="appstore">Appstore</a></li>
+            <li><a href="#contact" id="nav-contact">Contact</a></li>
+        </ul>
+    </nav>
+
 
     <!-- Hero Section -->
-    <header class="hero">
+    <header class="hero" id="home">
         <img src="images/israrxy.png" alt="Md Israr Ahamed" class="hero-image">
         <h1>Md Israr Ahamed</h1>
         <p class="subtitle">Developer from West Bengal, India</p>
@@ -779,6 +866,37 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Navigation Menu Logic ---
+            const menuToggle = document.getElementById('menu-toggle');
+            const mainNav = document.getElementById('main-nav');
+            const navCloseBtn = document.getElementById('nav-close-btn');
+            const navLinks = mainNav.querySelectorAll('a');
+
+            function openNav() {
+                mainNav.classList.add('is-open');
+            }
+            function closeNav() {
+                mainNav.classList.remove('is-open');
+            }
+
+            menuToggle.addEventListener('click', openNav);
+            navCloseBtn.addEventListener('click', closeNav);
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    // Smooth scroll for internal links
+                    if (link.hash) {
+                         e.preventDefault();
+                         const targetId = link.getAttribute('href');
+                         const targetElement = document.querySelector(targetId);
+                         if(targetElement) {
+                             targetElement.scrollIntoView({ behavior: 'smooth' });
+                         }
+                    }
+                    closeNav(); // Close nav after any link is clicked
+                });
+            });
+
+
             // --- Buy Me a Coffee Widget Logic ---
             const bmacTriggerIcon = document.getElementById('bmac-trigger-icon');
             const bmacCard = document.getElementById('bmac-card');
