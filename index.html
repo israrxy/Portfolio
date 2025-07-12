@@ -51,11 +51,11 @@
         
         /* --- Overlay Navigation --- */
         #menu-toggle {
-            position: absolute; /* Changed from fixed to absolute */
+            position: absolute; 
             top: 20px;
             left: 20px;
-            width: 26px;
-            height: 20px;
+            width: 26px; 
+            height: 20px; 
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -73,7 +73,7 @@
             transform-origin: center;
         }
         body.nav-open #menu-toggle {
-            position: fixed; /* Becomes fixed only when menu is open */
+            position: fixed;
         }
         body.nav-open #menu-toggle span {
              background-color: var(--accent-color);
@@ -148,9 +148,18 @@
             padding: 0 20px;
         }
 
+        /* This wrapper contains all the main page content */
+        #page-content-wrapper {
+            transition: filter 0.3s ease-in-out;
+        }
+        #page-content-wrapper.is-content-blurred {
+            filter: blur(5px);
+            pointer-events: none; /* Disable interaction with blurred content */
+        }
+        
         /* --- Header & Hero Section --- */
         .hero {
-            position: relative; /* Needed for absolute positioning of menu toggle */
+            position: relative;
             padding: 80px 0;
             text-align: center;
             display: flex;
@@ -432,6 +441,9 @@
         }
 
         /* --- WIDGET STYLES --- */
+        #bmac-trigger-icon, #music-trigger-icon { z-index: 1003; }
+        #bmac-card, #music-card { z-index: 1004; }
+
         #bmac-trigger-icon {
             position: fixed;
             bottom: 20px;
@@ -441,7 +453,6 @@
             border-radius: 16px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             cursor: pointer;
-            z-index: 999;
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
             -webkit-tap-highlight-color: transparent;
             outline: none;
@@ -455,7 +466,6 @@
             background-color: var(--primary-color);
             border-radius: 16px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-            z-index: 998;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -511,7 +521,6 @@
             justify-content: center;
             font-size: 1.2rem;
             cursor: pointer;
-            z-index: 999;
             transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
             -webkit-tap-highlight-color: transparent;
             outline: none;
@@ -529,7 +538,6 @@
             background-color: var(--primary-color);
             border-radius: 16px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-            z-index: 998;
             padding: 15px 20px;
             opacity: 0;
             transform: scale(0.5);
@@ -621,108 +629,110 @@
         </ul>
     </nav>
 
-    <header class="hero" id="home">
-        <img src="images/israrxy.png" alt="Md Israr Ahamed" class="hero-image">
-        <h1>Md Israr Ahamed</h1>
-        <p class="subtitle">Developer from West Bengal, India</p>
-        <p>I'm a 16-year-old developer specializing in using AI to build innovative Android, Windows, and Web applications.</p>
-        
-        <div class="social-links">
-            <a href="https://github.com/israrxy" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://linkedin.com/in/md-israr-ahamed" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="https://x.com/israrxy" target="_blank" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/israrxy" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/share/1PMiLGoqwd/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-        </div>
-        
-        <a href="appstore" class="btn-gradient-border">My Appstore</a>
-
-        <div class="skills-section">
-            <div class="skills-toggle" id="skills-toggle">
-                My Skills <i class="fas fa-chevron-down skills-arrow"></i>
+    <div id="page-content-wrapper">
+        <header class="hero" id="home">
+            <img src="images/israrxy.png" alt="Md Israr Ahamed" class="hero-image">
+            <h1>Md Israr Ahamed</h1>
+            <p class="subtitle">Developer from West Bengal, India</p>
+            <p>I'm a 16-year-old developer specializing in using AI to build innovative Android, Windows, and Web applications.</p>
+            
+            <div class="social-links">
+                <a href="https://github.com/israrxy" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/md-israr-ahamed" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://x.com/israrxy" target="_blank" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com/israrxy" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1PMiLGoqwd/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
             </div>
-            <div class="skills-content" id="skills-content">
-                <ul>
-                    <li>Html: <span>Good</span></li>
-                    <li>Css: <span>Intermediate</span></li>
-                    <li>C++: <span>Beginner</span></li>
-                    <li>Python: <span>Intermediate</span></li>
-                    <li>AI prompting: <span>Expert</span></li>
-                </ul>
-            </div>
-        </div>
-    </header>
+            
+            <a href="appstore" class="btn-gradient-border">My Appstore</a>
 
-    <main>
-        <!-- Projects Section -->
-        <section id="projects" class="section">
-            <div class="container">
-                <h2 class="section-title">Featured Projects</h2>
-                <div class="project-grid">
-                    <!-- Project Cards -->
-                    <div class="project-card">
-                        <img src="images/py.png" alt="Peacify Music Player" class="project-image">
-                        <div class="project-content">
-                            <h3 class="project-title">Peacify Music Player</h3>
-                             <div class="project-tags">
-                                <span class="tag">Android</span><span class="tag">Open Source</span><span class="tag">Music</span>
-                            </div>
-                            <p class="project-description">A free, open-source music player for Android, offering a clean and peaceful listening experience.</p>
-                            <div class="project-links">
-                                <a href="https://peacify.k.vu/" target="_blank" class="btn">Android</a>
+            <div class="skills-section">
+                <div class="skills-toggle" id="skills-toggle">
+                    My Skills <i class="fas fa-chevron-down skills-arrow"></i>
+                </div>
+                <div class="skills-content" id="skills-content">
+                    <ul>
+                        <li>Html: <span>Good</span></li>
+                        <li>Css: <span>Intermediate</span></li>
+                        <li>C++: <span>Beginner</span></li>
+                        <li>Python: <span>Intermediate</span></li>
+                        <li>AI prompting: <span>Expert</span></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Projects Section -->
+            <section id="projects" class="section">
+                <div class="container">
+                    <h2 class="section-title">Featured Projects</h2>
+                    <div class="project-grid">
+                        <!-- Project Cards -->
+                        <div class="project-card">
+                            <img src="images/py.png" alt="Peacify Music Player" class="project-image">
+                            <div class="project-content">
+                                <h3 class="project-title">Peacify Music Player</h3>
+                                 <div class="project-tags">
+                                    <span class="tag">Android</span><span class="tag">Open Source</span><span class="tag">Music</span>
+                                </div>
+                                <p class="project-description">A free, open-source music player for Android, offering a clean and peaceful listening experience.</p>
+                                <div class="project-links">
+                                    <a href="https://peacify.k.vu/" target="_blank" class="btn">Android</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="project-card">
-                        <img src="images/py.png" alt="Peacify for Web" class="project-image">
-                        <div class="project-content">
-                            <h3 class="project-title">Peacify for Web</h3>
-                            <div class="project-tags">
-                                <span class="tag">Web App</span><span class="tag">Open Source</span><span class="tag">Music</span>
-                            </div>
-                            <p class="project-description">The web-based version of the Peacify music player, making your favorite open-source player accessible from any browser.</p>
-                            <div class="project-links">
-                                <a href="http://peacify.k.vu" target="_blank" class="btn">Visit Site</a>
-                                <a href="https://github.com/israrxy/peacify" target="_blank" class="btn btn-secondary">View on GitHub</a>
+                        <div class="project-card">
+                            <img src="images/py.png" alt="Peacify for Web" class="project-image">
+                            <div class="project-content">
+                                <h3 class="project-title">Peacify for Web</h3>
+                                <div class="project-tags">
+                                    <span class="tag">Web App</span><span class="tag">Open Source</span><span class="tag">Music</span>
+                                </div>
+                                <p class="project-description">The web-based version of the Peacify music player, making your favorite open-source player accessible from any browser.</p>
+                                <div class="project-links">
+                                    <a href="http://peacify.k.vu" target="_blank" class="btn">Visit Site</a>
+                                    <a href="https://github.com/israrxy/peacify" target="_blank" class="btn btn-secondary">View on GitHub</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="project-card">
-                        <img src="images/gg.png" alt="GrindGo App" class="project-image">
-                        <div class="project-content">
-                            <h3 class="project-title">GrindGo</h3>
-                            <div class="project-tags">
-                                <span class="tag">Android</span><span class="tag">Fitness</span><span class="tag">AI</span>
-                            </div>
-                            <p class="project-description">A personal fitness and calorie tracker designed to help you achieve your health goals with intelligent tracking and insights.</p>
-                            <div class="project-links">
-                                <a href="http://titled.site/grindgo" target="_blank" class="btn">Download APK</a>
+                        <div class="project-card">
+                            <img src="images/gg.png" alt="GrindGo App" class="project-image">
+                            <div class="project-content">
+                                <h3 class="project-title">GrindGo</h3>
+                                <div class="project-tags">
+                                    <span class="tag">Android</span><span class="tag">Fitness</span><span class="tag">AI</span>
+                                </div>
+                                <p class="project-description">A personal fitness and calorie tracker designed to help you achieve your health goals with intelligent tracking and insights.</p>
+                                <div class="project-links">
+                                    <a href="http://titled.site/grindgo" target="_blank" class="btn">Download APK</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="section">
-            <div class="container">
-                <h2 class="section-title">Get In Touch</h2>
-                <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of an amazing team. Feel free to reach out.</p>
-                <div class="contact-info">
-                    <p><strong>For business inquiries:</strong> <a href="mailto:info@titled.site">info@titled.site</a></p>
-                    <p><strong>For personal contact:</strong> <a href="mailto:israrahamed2009@gmail.com">info@israrxy.is-a.dev</a></p>
+            <!-- Contact Section -->
+            <section id="contact" class="section">
+                <div class="container">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of an amazing team. Feel free to reach out.</p>
+                    <div class="contact-info">
+                        <p><strong>For business inquiries:</strong> <a href="mailto:info@titled.site">info@titled.site</a></p>
+                        <p><strong>For personal contact:</strong> <a href="mailto:israrahamed2009@gmail.com">info@israrxy.is-a.dev</a></p>
+                    </div>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>© 2025 Md Israr Ahamed. All Rights Reserved.</p>
-        </div>
-    </footer>
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <p>© 2025 Md Israr Ahamed. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
     
     <!-- WIDGETS -->
     <img src="images/bmac.png" alt="Buy Me a Coffee" id="bmac-trigger-icon">
@@ -753,10 +763,11 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Overlay Navigation Logic ---
+            // --- Navigation Logic ---
             const menuToggle = document.getElementById('menu-toggle');
+            const mainNav = document.getElementById('main-nav');
             const navOverlay = document.getElementById('nav-overlay');
-            const navLinks = document.querySelectorAll('#main-nav a');
+            const navLinks = mainNav.querySelectorAll('a');
 
             function toggleNav() {
                 document.body.classList.toggle('nav-open');
@@ -773,26 +784,54 @@
                 });
             });
 
-            // --- Buy Me a Coffee Widget Logic ---
+            // --- Widget & Blur Logic ---
+            const contentWrapper = document.getElementById('page-content-wrapper');
             const bmacTriggerIcon = document.getElementById('bmac-trigger-icon');
             const bmacCard = document.getElementById('bmac-card');
             const bmacCloseBtn = bmacCard.querySelector('.bmac-close');
+            const musicTriggerIcon = document.getElementById('music-trigger-icon');
+            const musicCard = document.getElementById('music-card');
+            const musicCloseBtn = musicCard.querySelector('.music-close');
+            const audio = document.getElementById('bg-audio');
+
+            function updateBlur() {
+                if (bmacCard.classList.contains('is-visible') || musicCard.classList.contains('is-visible')) {
+                    contentWrapper.classList.add('is-content-blurred');
+                } else {
+                    contentWrapper.classList.remove('is-content-blurred');
+                }
+            }
+
             bmacTriggerIcon.addEventListener('click', () => {
                 bmacCard.classList.add('is-visible');
                 bmacTriggerIcon.style.opacity = '0';
                 bmacTriggerIcon.style.pointerEvents = 'none';
+                updateBlur();
             });
             bmacCloseBtn.addEventListener('click', () => {
                 bmacCard.classList.remove('is-visible');
                 bmacTriggerIcon.style.opacity = '1';
                 bmacTriggerIcon.style.pointerEvents = 'auto';
+                updateBlur();
+            });
+            
+            musicTriggerIcon.addEventListener('click', () => {
+                togglePlay();
+                if (!musicCard.classList.contains('is-visible')) {
+                    musicCard.classList.add('is-visible');
+                    musicTriggerIcon.style.opacity = '0';
+                    musicTriggerIcon.style.pointerEvents = 'none';
+                }
+                updateBlur();
+            });
+            musicCloseBtn.addEventListener('click', () => {
+                musicCard.classList.remove('is-visible');
+                musicTriggerIcon.style.opacity = '1';
+                musicTriggerIcon.style.pointerEvents = 'auto';
+                updateBlur();
             });
 
-            // --- Music Player Widget Logic ---
-            const audio = document.getElementById('bg-audio');
-            const musicTriggerIcon = document.getElementById('music-trigger-icon');
-            const musicCard = document.getElementById('music-card');
-            const musicCloseBtn = musicCard.querySelector('.music-close');
+            // --- Music Player Logic ---
             const playPauseBtn = document.getElementById('play-pause-btn');
             const rewindBtn = document.getElementById('rewind-btn');
             const forwardBtn = document.getElementById('forward-btn');
@@ -811,22 +850,9 @@
                 const secs = Math.floor(seconds % 60);
                 return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
             }
-            musicTriggerIcon.addEventListener('click', () => {
-                togglePlay();
-                if (!musicCard.classList.contains('is-visible')) {
-                    musicCard.classList.add('is-visible');
-                    musicTriggerIcon.style.opacity = '0';
-                    musicTriggerIcon.style.pointerEvents = 'none';
-                }
-            });
             playPauseBtn.addEventListener('click', togglePlay);
             audio.addEventListener('play', updateIcons);
             audio.addEventListener('pause', updateIcons);
-            musicCloseBtn.addEventListener('click', () => {
-                musicCard.classList.remove('is-visible');
-                musicTriggerIcon.style.opacity = '1';
-                musicTriggerIcon.style.pointerEvents = 'auto';
-            });
             rewindBtn.addEventListener('click', () => { audio.currentTime -= 10; });
             forwardBtn.addEventListener('click', () => { audio.currentTime += 10; });
             audio.addEventListener('loadedmetadata', () => {
