@@ -171,25 +171,66 @@
             justify-content: center;
             margin-bottom: 25px;
             cursor: pointer;
+            transform: translate(-15px, -15px); /* Shifted up and to the left */
         }
-        .hero-image {
+        .hero-image-cloud {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            animation: pulse-cloud 5s infinite ease-in-out;
+            filter: drop-shadow(0 0 8px var(--accent-color));
+        }
+        @keyframes pulse-cloud {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+            100% { transform: scale(1); }
+        }
+        
+        .pfp-border-wrapper {
+            position: relative;
+            z-index: 2;
             width: 150px;
             height: 150px;
+            padding: 3px; /* Creates the border thickness */
             border-radius: 50%;
-            border: 4px solid var(--secondary-color); /* Simplified border */
+            overflow: hidden;
+        }
+        .pfp-border-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 200%; height: 200%; /* Larger for smoother gradient rotation */
+            transform: translate(-50%, -50%);
+            background: conic-gradient(
+                var(--dark-blue),
+                var(--accent-color),
+                var(--light-blue),
+                var(--accent-color),
+                var(--dark-blue)
+            );
+            animation: borderMove 3s linear infinite;
+        }
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
             object-fit: cover;
+            position: relative;
+            z-index: 3;
+            background: var(--primary-color);
         }
         
         /* The Music Bubble */
         #music-bubble {
             position: absolute;
-            top: -10px; /* Adjusted position */
-            left: 60%;
+            top: -5px; 
+            left: 65%;
             transform: translateX(-50%);
-            z-index: 3;
+            z-index: 4;
             background-color: var(--bubble-pink);
             color: #fff;
-            padding: 6px 14px; /* Made smaller */
+            padding: 6px 14px;
             border-radius: 16px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             display: flex;
@@ -199,7 +240,6 @@
             font-family: 'Poppins', sans-serif;
             pointer-events: none;
         }
-        /* Bubble Tail */
         #music-bubble::after {
             content: '';
             position: absolute;
@@ -211,27 +251,24 @@
             background-color: var(--bubble-pink);
             clip-path: polygon(0 0, 100% 0, 50% 100%);
         }
-
-        /* The emoji on the corner */
         .bubble-corner-emoji {
             position: absolute;
             top: -12px;
             left: -12px;
-            font-size: 1.5rem; /* Emoji size */
+            font-size: 1.5rem;
             transform: rotate(-25deg);
-            pointer-events: none;
         }
-        
         .music-bubble-icon {
             font-style: normal;
             font-weight: bold;
             font-size: 1rem;
             transition: opacity 0.2s ease-out;
         }
-
-        /* Logic for showing playing icon vs emoji */
-        .playing-icon { opacity: 0; }
-        #music-bubble.is-playing .emoji-icon { opacity: 0; }
+        .playing-icon {
+            position: absolute;
+            opacity: 0;
+        }
+        #music-bubble.is-playing .emoji-icon-placeholder { opacity: 0; }
         #music-bubble.is-playing .playing-icon { opacity: 1; }
 
         .music-bubble-text {
@@ -598,11 +635,15 @@
     <div id="page-content-wrapper">
         <header class="hero" id="home">
             <div class="hero-image-container">
-                <img src="images/israrxy.png" alt="Md Israr Ahamed" class="hero-image">
+                <svg class="hero-image-cloud" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#00BFFF" d="M48.1,-63.3C61.3,-52.1,70.3,-35.8,73.5,-18.8C76.7,-1.8,74.1,15.8,65.6,29.9C57.1,43.9,42.7,54.4,27.1,62C11.5,69.6,-5.3,74.3,-21.2,71.2C-37.1,68.1,-52.2,57.2,-61.7,43.3C-71.2,29.4,-75.1,12.5,-73.2,-4.2C-71.3,-20.9,-63.5,-37.4,-51,-48.8C-38.5,-60.2,-21.2,-66.6,-2.8,-65.4C15.5,-64.2,31,-56,48.1,-63.3Z" transform="translate(100 100)" />
+                </svg>
+                <div class="pfp-border-wrapper">
+                    <img src="images/israrxy.png" alt="Md Israr Ahamed" class="hero-image">
+                </div>
                 <div id="music-bubble">
                     <div class="bubble-corner-emoji">💝</div>
                     <i class="music-bubble-icon playing-icon">||</i>
-                    <i class="music-bubble-icon emoji-icon"></i> <!-- Empty placeholder for alignment -->
                     <div class="music-bubble-text">
                         <div class="music-bubble-title">Sahiba</div>
                         <div class="music-bubble-artist">Aditya Rikhari</div>
@@ -765,9 +806,7 @@
             const audio = document.getElementById('bg-audio');
 
             function toggleMusicPlayer() {
-                const isPlaying = audio.paused;
-
-                if (isPlaying) {
+                if (audio.paused) {
                     audio.play();
                     musicBubble.classList.add('is-playing');
                 } else {
