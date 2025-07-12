@@ -20,8 +20,10 @@
             --bg-color: #121212;
             --primary-color: #1d1d1d;
             --secondary-color: #2a2a2a;
-            --accent-color: #00bfff; /* Deep Sky Blue */
-            --neon-pink: #ff00ff;
+            --accent-color: #00bfff; 
+            --neon-pink: #f009b3;
+            --neon-cyan: #00e0ff;
+            --button-bg: #11162B; /* Dark blue from image */
             --text-color: #e0e0e0;
             --heading-color: #ffffff;
         }
@@ -95,100 +97,56 @@
             font-size: 1.1rem;
         }
 
-        /* --- Neon Border Appstore Button --- */
-        .btn-appstore-neon {
+        /* --- Dual Line Neon Button --- */
+        .btn-dual-neon-frame {
             position: relative;
             display: inline-block;
-            padding: 15px 30px;
+            padding: 18px 35px; /* Adjust padding to control button size */
             margin: 15px 0 30px;
-            color: var(--neon-pink);
-            background-color: transparent;
-            border: 2px solid transparent; /* Placeholder for size */
+            color: var(--heading-color);
+            background: transparent; /* Button itself is transparent */
             text-decoration: none;
-            text-transform: uppercase;
             font-family: 'Poppins', sans-serif;
             font-size: 1.1rem;
             font-weight: 600;
-            letter-spacing: 2px;
-            overflow: hidden;
-            transition: 0.5s;
+            letter-spacing: 1px;
+            border-radius: 30px; /* Controls the corner rounding */
+            z-index: 1;
+            transition: color 0.4s ease;
         }
 
-        .btn-appstore-neon:hover {
-            background: var(--neon-pink);
-            color: var(--bg-color);
-            box-shadow: 0 0 5px var(--neon-pink),
-                        0 0 25px var(--neon-pink),
-                        0 0 50px var(--neon-pink),
-                        0 0 100px var(--neon-pink);
-        }
-
-        .btn-appstore-neon span {
+        /* This pseudo-element creates the outer border and its glow */
+        .btn-dual-neon-frame::after {
+            content: '';
             position: absolute;
-            display: block;
+            z-index: -2;
+            inset: 0;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+            border-radius: inherit;
+            filter: blur(8px); /* The outer glow */
+            transition: filter 0.4s ease;
         }
 
-        /* Top border animation */
-        .btn-appstore-neon span:nth-child(1) {
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-pink));
-            animation: btn-anim1 1.5s linear infinite;
-        }
-
-        @keyframes btn-anim1 {
-            0% { left: -100%; }
-            50%, 100% { left: 100%; }
-        }
-
-        /* Right border animation */
-        .btn-appstore-neon span:nth-child(2) {
-            top: -100%;
-            right: 0;
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(180deg, transparent, var(--neon-pink));
-            animation: btn-anim2 1.5s linear infinite;
-            animation-delay: .375s;
-        }
-
-        @keyframes btn-anim2 {
-             0% { top: -100%; }
-            50%, 100% { top: 100%; }
-        }
-
-        /* Bottom border animation */
-        .btn-appstore-neon span:nth-child(3) {
-            bottom: 0;
-            right: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(270deg, transparent, var(--neon-pink));
-            animation: btn-anim3 1.5s linear infinite;
-            animation-delay: .75s;
+        /* This pseudo-element creates the button's dark background AND the inner border */
+        .btn-dual-neon-frame::before {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            inset: 3px; /* This gap creates the outer border */
+            background: var(--button-bg); /* Dark background of the button */
+            border: 2px solid;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+            border-radius: 27px; /* Must be calculated (border-radius - inset) */
+            transition: background 0.4s ease;
         }
         
-        @keyframes btn-anim3 {
-            0% { right: -100%; }
-            50%, 100% { right: 100%; }
+        .btn-dual-neon-frame:hover {
+            color: var(--neon-cyan);
         }
 
-        /* Left border animation */
-        .btn-appstore-neon span:nth-child(4) {
-            bottom: -100%;
-            left: 0;
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(360deg, transparent, var(--neon-pink));
-            animation: btn-anim4 1.5s linear infinite;
-            animation-delay: 1.125s;
-        }
-
-        @keyframes btn-anim4 {
-            0% { bottom: -100%; }
-            50%, 100% { bottom: 100%; }
+        .btn-dual-neon-frame:hover::after {
+            filter: blur(12px);
         }
         
         /* --- Social Links --- */
@@ -654,14 +612,8 @@
         <p class="subtitle">Developer from West Bengal, India</p>
         <p>I'm a 16-year-old developer specializing in using AI to build innovative Android, Windows, and Web applications.</p>
         
-        <!-- Neon Border Appstore Button -->
-        <a href="appstore" class="btn-appstore-neon">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            My Appstore
-        </a>
+        <!-- Dual Line Neon Button -->
+        <a href="appstore" class="btn-dual-neon-frame">My Appstore</a>
 
         <div class="social-links">
             <a href="https://github.com/israrxy" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
