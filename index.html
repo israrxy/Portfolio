@@ -21,8 +21,8 @@
             --primary-color: #1d1d1d; /* Inner button background */
             --secondary-color: #2a2a2a;
             --accent-color: #00bfff;   /* Main theme blue */
-            --light-blue: #00e0ff;    /* Lighter blue for gradient */
-            --dark-blue: #0077ff;     /* Darker blue for gradient */
+            --light-blue: #7DF9FF;     /* Lighter, electric blue for gradient */
+            --dark-blue: #0052D4;      /* Deeper blue for gradient contrast */
             --text-color: #e0e0e0;
             --heading-color: #ffffff;
         }
@@ -96,14 +96,29 @@
             font-size: 1.1rem;
         }
 
+        /* --- Social Links --- */
+        .social-links {
+            margin-bottom: 35px; /* Added margin to create space for the button below */
+        }
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
         /* --- Moving Gradient Border Button (Based on your example) --- */
         .btn-gradient-border {
             position: relative;
             display: inline-block;
-            padding: 15px 35px;
-            margin: 15px 0 30px;
+            padding: 12px 35px; /* Reduced vertical padding for lower height */
             color: var(--heading-color);
-            background: transparent; /* The link itself has no background */
+            background: transparent;
             border: none;
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
@@ -117,7 +132,6 @@
             transition: color 0.4s ease;
         }
 
-        /* This is the moving gradient that creates the border */
         .btn-gradient-border::before {
             content: "";
             position: absolute;
@@ -127,18 +141,18 @@
             bottom: -2px;
             background: linear-gradient(
                 120deg,
-                var(--accent-color),
                 var(--dark-blue),
+                var(--accent-color),
                 var(--light-blue),
-                var(--accent-color)
+                var(--accent-color),
+                var(--dark-blue)
             );
-            background-size: 300% 300%;
+            background-size: 400% 400%; /* Increased size for more noticeable movement */
             z-index: -1;
-            animation: borderMove 4s linear infinite;
-            border-radius: 14px; /* Slightly larger than button's radius */
+            animation: borderMove 3s linear infinite; /* Faster animation */
+            border-radius: 14px;
         }
 
-        /* This creates the dark background inside the border */
         .btn-gradient-border::after {
             content: "";
             position: absolute;
@@ -148,11 +162,11 @@
             bottom: 2px;
             background: var(--primary-color);
             z-index: -1;
-            border-radius: 10px; /* Slightly smaller than button's radius */
+            border-radius: 10px;
         }
         
         .btn-gradient-border:hover {
-            color: var(--accent-color);
+            color: var(--light-blue);
         }
 
         @keyframes borderMove {
@@ -165,19 +179,6 @@
             100% {
                 background-position: 0% 50%;
             }
-        }
-
-        /* --- Social Links --- */
-        .social-links a {
-            color: var(--text-color);
-            font-size: 1.8rem;
-            margin: 0 15px;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--accent-color);
-            transform: translateY(-3px);
         }
 
         /* --- Skills Section --- */
@@ -630,9 +631,6 @@
         <p class="subtitle">Developer from West Bengal, India</p>
         <p>I'm a 16-year-old developer specializing in using AI to build innovative Android, Windows, and Web applications.</p>
         
-        <!-- Moving Gradient Border Button -->
-        <a href="appstore" class="btn-gradient-border">My Appstore</a>
-
         <div class="social-links">
             <a href="https://github.com/israrxy" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
             <a href="https://linkedin.com/in/md-israr-ahamed" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -641,6 +639,9 @@
             <a href="https://www.facebook.com/share/1PMiLGoqwd/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
         </div>
         
+        <!-- Moving Gradient Border Button -->
+        <a href="appstore" class="btn-gradient-border">My Appstore</a>
+
         <!-- My Skills Section -->
         <div class="skills-section">
             <div class="skills-toggle" id="skills-toggle">
