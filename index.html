@@ -95,65 +95,102 @@
             font-size: 1.1rem;
         }
 
-        /* --- Animated Neon Appstore Button --- */
-        .appstore-button-wrapper {
+        /* --- Neon Border Appstore Button --- */
+        .btn-appstore-neon {
             position: relative;
-            width: 220px;
-            height: 50px;
-            margin: 15px auto 30px; /* Adjusted margins */
-        }
-
-        .btn-appstore-animated {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--primary-color);
-            border-radius: 10px;
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 15px 0 30px;
+            color: var(--neon-pink);
+            background-color: transparent;
+            border: 2px solid transparent; /* Placeholder for size */
             text-decoration: none;
-            color: var(--heading-color);
+            text-transform: uppercase;
             font-family: 'Poppins', sans-serif;
             font-size: 1.1rem;
             font-weight: 600;
-            letter-spacing: 1px;
-            z-index: 2;
-            transition: color 0.4s;
+            letter-spacing: 2px;
+            overflow: hidden;
+            transition: 0.5s;
         }
 
-        .appstore-button-wrapper::before,
-        .appstore-button-wrapper::after {
-            content: '';
+        .btn-appstore-neon:hover {
+            background: var(--neon-pink);
+            color: var(--bg-color);
+            box-shadow: 0 0 5px var(--neon-pink),
+                        0 0 25px var(--neon-pink),
+                        0 0 50px var(--neon-pink),
+                        0 0 100px var(--neon-pink);
+        }
+
+        .btn-appstore-neon span {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            display: block;
+        }
+
+        /* Top border animation */
+        .btn-appstore-neon span:nth-child(1) {
+            top: 0;
+            left: -100%;
             width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-pink));
+            animation: btn-anim1 1.5s linear infinite;
+        }
+
+        @keyframes btn-anim1 {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+
+        /* Right border animation */
+        .btn-appstore-neon span:nth-child(2) {
+            top: -100%;
+            right: 0;
+            width: 2px;
             height: 100%;
-            border-radius: 10px;
-            background: conic-gradient(transparent, transparent, transparent, var(--neon-pink));
-            z-index: 1;
-            animation: rotate-border 4s linear infinite;
+            background: linear-gradient(180deg, transparent, var(--neon-pink));
+            animation: btn-anim2 1.5s linear infinite;
+            animation-delay: .375s;
+        }
+
+        @keyframes btn-anim2 {
+             0% { top: -100%; }
+            50%, 100% { top: 100%; }
+        }
+
+        /* Bottom border animation */
+        .btn-appstore-neon span:nth-child(3) {
+            bottom: 0;
+            right: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(270deg, transparent, var(--neon-pink));
+            animation: btn-anim3 1.5s linear infinite;
+            animation-delay: .75s;
         }
         
-        .appstore-button-wrapper::after {
-            filter: blur(25px);
-            animation-delay: -0.5s; /* Offset the glow animation */
+        @keyframes btn-anim3 {
+            0% { right: -100%; }
+            50%, 100% { right: 100%; }
         }
 
-        @keyframes rotate-border {
-            from {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-            to {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
+        /* Left border animation */
+        .btn-appstore-neon span:nth-child(4) {
+            bottom: -100%;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(360deg, transparent, var(--neon-pink));
+            animation: btn-anim4 1.5s linear infinite;
+            animation-delay: 1.125s;
         }
 
-        .appstore-button-wrapper:hover .btn-appstore-animated {
-            color: var(--neon-pink);
+        @keyframes btn-anim4 {
+            0% { bottom: -100%; }
+            50%, 100% { bottom: 100%; }
         }
-
+        
         /* --- Social Links --- */
         .social-links a {
             color: var(--text-color);
@@ -617,10 +654,14 @@
         <p class="subtitle">Developer from West Bengal, India</p>
         <p>I'm a 16-year-old developer specializing in using AI to build innovative Android, Windows, and Web applications.</p>
         
-        <!-- Animated Neon Appstore Button -->
-        <div class="appstore-button-wrapper">
-            <a href="appstore" class="btn-appstore-animated">My Appstore</a>
-        </div>
+        <!-- Neon Border Appstore Button -->
+        <a href="appstore" class="btn-appstore-neon">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            My Appstore
+        </a>
 
         <div class="social-links">
             <a href="https://github.com/israrxy" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
