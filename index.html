@@ -21,6 +21,7 @@
             --primary-color: #1d1d1d;
             --secondary-color: #2a2a2a;
             --accent-color: #00bfff; /* Deep Sky Blue */
+            --neon-pink: #ff00ff;
             --text-color: #e0e0e0;
             --heading-color: #ffffff;
         }
@@ -94,6 +95,66 @@
             font-size: 1.1rem;
         }
 
+        /* --- Animated Neon Appstore Button --- */
+        .appstore-button-wrapper {
+            position: relative;
+            width: 220px;
+            height: 50px;
+            margin: 15px auto 30px; /* Adjusted margins */
+        }
+
+        .btn-appstore-animated {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-color);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--heading-color);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            z-index: 2;
+            transition: color 0.4s;
+        }
+
+        .appstore-button-wrapper::before,
+        .appstore-button-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            background: conic-gradient(transparent, transparent, transparent, var(--neon-pink));
+            z-index: 1;
+            animation: rotate-border 4s linear infinite;
+        }
+        
+        .appstore-button-wrapper::after {
+            filter: blur(25px);
+            animation-delay: -0.5s; /* Offset the glow animation */
+        }
+
+        @keyframes rotate-border {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .appstore-button-wrapper:hover .btn-appstore-animated {
+            color: var(--neon-pink);
+        }
+
+        /* --- Social Links --- */
         .social-links a {
             color: var(--text-color);
             font-size: 1.8rem;
@@ -129,7 +190,6 @@
             border-radius: 8px;
         }
         
-        /* FINAL FIX: This rule removes the browser's default outline when the button is clicked/focused. The hover effect has been completely removed. */
         .skills-toggle:focus {
             outline: none;
         }
@@ -556,6 +616,12 @@
         <h1>Md Israr Ahamed</h1>
         <p class="subtitle">Developer from West Bengal, India</p>
         <p>I'm a 16-year-old developer specializing in using AI to build innovative Android, Windows, and Web applications.</p>
+        
+        <!-- Animated Neon Appstore Button -->
+        <div class="appstore-button-wrapper">
+            <a href="appstore" class="btn-appstore-animated">My Appstore</a>
+        </div>
+
         <div class="social-links">
             <a href="https://github.com/israrxy" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
             <a href="https://linkedin.com/in/md-israr-ahamed" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
