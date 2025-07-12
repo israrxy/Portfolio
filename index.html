@@ -57,24 +57,36 @@
         /* --- Navigation Menu --- */
         #menu-toggle {
             position: fixed;
-            top: 20px;
-            left: 20px;
-            width: 40px;
-            height: 32px;
+            top: 15px;
+            left: 15px;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(29, 29, 29, 0.7);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--secondary-color);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1001;
+            transition: background-color 0.3s ease;
+        }
+        #menu-toggle:hover {
+            background-color: var(--secondary-color);
+        }
+        .hamburger-box {
+            width: 22px;
+            height: 16px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            cursor: pointer;
-            z-index: 1001;
-            background: transparent;
-            border: none;
         }
-        #menu-toggle span {
+        .hamburger-box span {
             width: 100%;
-            height: 4px;
+            height: 3px;
             background-color: var(--heading-color);
             border-radius: 2px;
-            transition: all 0.3s ease-in-out;
         }
         
         #main-nav {
@@ -84,21 +96,23 @@
             width: 280px;
             height: 100%;
             background-color: var(--primary-color);
-            z-index: 1000;
+            z-index: 1002; /* Higher z-index to overlay everything */
             transform: translateX(-100%);
             transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             display: flex;
             flex-direction: column;
-            padding-top: 80px; /* Space for close button */
+            padding-top: 70px;
+            border-right: 1px solid var(--secondary-color);
         }
         #main-nav.is-open {
             transform: translateX(0);
+            box-shadow: 5px 0 25px rgba(0,0,0,0.3);
         }
         #nav-close-btn {
             position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 2.5rem;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
             color: var(--heading-color);
             cursor: pointer;
             background: none;
@@ -109,8 +123,8 @@
         }
         .nav-links li a {
             display: block;
-            padding: 20px 30px;
-            font-size: 1.3rem;
+            padding: 18px 30px;
+            font-size: 1.2rem;
             font-weight: 600;
             color: var(--heading-color);
             text-decoration: none;
@@ -121,16 +135,15 @@
             background-color: var(--secondary-color);
         }
 
-
         /* --- Header & Hero Section --- */
         .hero {
-            padding: 80px 0 0;
+            padding: 80px 0;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh; /* Changed to 100vh for better hero feel */
+            min-height: 100vh;
         }
 
         .hero-image {
@@ -170,7 +183,7 @@
 
         /* --- Social Links --- */
         .social-links {
-            margin-bottom: 35px; /* Added margin to create space for the button below */
+            margin-bottom: 35px; 
         }
         .social-links a {
             color: var(--text-color);
@@ -184,11 +197,11 @@
             transform: translateY(-3px);
         }
 
-        /* --- Moving Gradient Border Button (Based on your example) --- */
+        /* --- Moving Gradient Border Button --- */
         .btn-gradient-border {
             position: relative;
             display: inline-block;
-            padding: 12px 35px; /* Reduced vertical padding for lower height */
+            padding: 12px 35px;
             color: var(--heading-color);
             background: transparent;
             border: none;
@@ -207,10 +220,7 @@
         .btn-gradient-border::before {
             content: "";
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
             background: linear-gradient(
                 120deg,
                 var(--dark-blue),
@@ -219,19 +229,16 @@
                 var(--accent-color),
                 var(--dark-blue)
             );
-            background-size: 400% 400%; /* Increased size for more noticeable movement */
+            background-size: 400% 400%;
             z-index: -1;
-            animation: borderMove 3s linear infinite; /* Faster animation */
+            animation: borderMove 3s linear infinite;
             border-radius: 14px;
         }
 
         .btn-gradient-border::after {
             content: "";
             position: absolute;
-            top: 2px;
-            left: 2px;
-            right: 2px;
-            bottom: 2px;
+            top: 2px; left: 2px; right: 2px; bottom: 2px;
             background: var(--primary-color);
             z-index: -1;
             border-radius: 10px;
@@ -242,15 +249,9 @@
         }
 
         @keyframes borderMove {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* --- Skills Section --- */
@@ -276,9 +277,7 @@
             border-radius: 8px;
         }
         
-        .skills-toggle:focus {
-            outline: none;
-        }
+        .skills-toggle:focus { outline: none; }
 
         .skills-toggle::after {
             content: '';
@@ -322,19 +321,14 @@
             display: flex;
             justify-content: space-between;
         }
-        .skills-content li:last-child {
-            border-bottom: none;
-        }
+        .skills-content li:last-child { border-bottom: none; }
         .skills-content li span {
             color: var(--accent-color);
             font-weight: 500;
         }
 
-
         /* --- Section Styling --- */
-        .section {
-            padding: 80px 0;
-        }
+        .section { padding: 80px 0; }
 
         .section-title {
             text-align: center;
@@ -345,7 +339,6 @@
             margin-bottom: 60px;
             position: relative;
         }
-
         .section-title::after {
             content: '';
             width: 80px;
@@ -364,7 +357,6 @@
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
-
         .project-card {
             background: var(--primary-color);
             border-radius: 12px;
@@ -374,36 +366,28 @@
             display: flex;
             flex-direction: column;
         }
-
         .project-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 8px 25px rgba(0, 191, 255, 0.1);
         }
-
         .project-image {
             width: 100%;
             height: 200px;
             object-fit: cover;
         }
-
         .project-content {
             padding: 25px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
-
         .project-title {
             font-family: 'Poppins', sans-serif;
             font-size: 1.5rem;
             color: var(--heading-color);
             margin-bottom: 10px;
         }
-
-        .project-tags {
-            margin-bottom: 15px;
-        }
-        
+        .project-tags { margin-bottom: 15px; }
         .tag {
             background: var(--secondary-color);
             color: var(--accent-color);
@@ -414,16 +398,11 @@
             display: inline-block;
             margin-right: 5px;
         }
-
         .project-description {
             margin-bottom: 20px;
             flex-grow: 1;
         }
-        
-        .project-links {
-            margin-top: auto;
-        }
-
+        .project-links { margin-top: auto; }
         .btn {
             display: inline-block;
             text-decoration: none;
@@ -436,25 +415,16 @@
             margin-right: 10px;
             margin-bottom: 5px;
         }
-
         .btn.btn-secondary {
             background: transparent;
             border: 1px solid var(--accent-color);
             color: var(--accent-color);
         }
-
-        .btn:hover {
-            background: #00a0d1;
-        }
-        
-        .btn.btn-secondary:hover {
-            background: rgba(0, 191, 255, 0.1);
-        }
+        .btn:hover { background: #00a0d1; }
+        .btn.btn-secondary:hover { background: rgba(0, 191, 255, 0.1); }
 
         /* --- Contact Section --- */
-        #contact {
-            text-align: center;
-        }
+        #contact { text-align: center; }
         #contact p {
             max-width: 500px;
             margin: 0 auto 30px auto;
@@ -469,9 +439,7 @@
             text-decoration: none;
             transition: color 0.3s;
         }
-        .contact-info a:hover {
-            text-decoration: underline;
-        }
+        .contact-info a:hover { text-decoration: underline; }
 
         /* --- Footer --- */
         footer {
@@ -482,7 +450,6 @@
         }
 
         /* --- WIDGET STYLES --- */
-        
         #bmac-trigger-icon {
             position: fixed;
             bottom: 20px;
@@ -497,10 +464,7 @@
             -webkit-tap-highlight-color: transparent;
             outline: none;
         }
-        #bmac-trigger-icon:hover {
-            transform: scale(1.1);
-        }
-        
+        #bmac-trigger-icon:hover { transform: scale(1.1); }
         #bmac-card {
             position: fixed;
             bottom: 20px;
@@ -521,13 +485,11 @@
             transform-origin: bottom right;
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
-        
         #bmac-card.is-visible {
             opacity: 1;
             transform: scale(1);
             pointer-events: auto;
         }
-
         .bmac-close {
             position: absolute;
             top: 10px;
@@ -537,10 +499,7 @@
             cursor: pointer;
             transition: color 0.3s;
         }
-        .bmac-close:hover {
-            color: var(--accent-color);
-        }
-
+        .bmac-close:hover { color: var(--accent-color); }
         .bmac-user-image {
             width: 70px;
             height: 70px;
@@ -549,15 +508,12 @@
             border: 3px solid var(--accent-color);
             margin-bottom: 15px;
         }
-
         .bmac-expanded-text {
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             margin-bottom: 20px;
             color: var(--heading-color);
         }
-
-        /* --- Music Player Widget --- */
         #music-trigger-icon {
             position: fixed;
             bottom: 20px;
@@ -583,7 +539,6 @@
             background-color: var(--accent-color);
             color: var(--primary-color);
         }
-
         #music-card {
             position: fixed;
             bottom: 20px;
@@ -600,13 +555,11 @@
             transform-origin: bottom left;
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
-
         #music-card.is-visible {
             opacity: 1;
             transform: scale(1);
             pointer-events: auto;
         }
-
         .music-close {
             position: absolute;
             top: 10px;
@@ -615,10 +568,7 @@
             color: var(--text-color);
             cursor: pointer;
         }
-        .music-close:hover {
-            color: var(--accent-color);
-        }
-
+        .music-close:hover { color: var(--accent-color); }
         .music-controls {
             display: flex;
             align-items: center;
@@ -627,31 +577,21 @@
             margin-top: 10px;
         }
         .music-controls button {
-            background: none;
-            border: none;
+            background: none; border: none;
             color: var(--text-color);
             font-size: 1.2rem;
             cursor: pointer;
             transition: color 0.3s, transform 0.3s;
         }
-        .music-controls button:hover {
-            color: var(--accent-color);
-        }
+        .music-controls button:hover { color: var(--accent-color); }
         .music-controls button.play-pause-btn {
             font-size: 1.8rem;
             color: var(--accent-color);
         }
-        .music-controls button.play-pause-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        .music-timeline-container {
-            width: 100%;
-            margin-top: 15px;
-        }
+        .music-controls button.play-pause-btn:hover { transform: scale(1.1); }
+        .music-timeline-container { width: 100%; margin-top: 15px; }
         #music-timeline {
-            width: 100%;
-            cursor: pointer;
+            width: 100%; cursor: pointer;
             -webkit-appearance: none;
             background: transparent;
         }
@@ -662,8 +602,7 @@
         }
         #music-timeline::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 14px;
-            height: 14px;
+            width: 14px; height: 14px;
             background: var(--accent-color);
             border-radius: 50%;
             margin-top: -5px;
@@ -678,18 +617,10 @@
 
         /* --- Responsive Design --- */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .hero {
-                padding: 60px 0 0;
-            }
-            .section {
-                padding: 60px 0;
-            }
-            .section-title {
-                font-size: 2rem;
-            }
+            .hero h1 { font-size: 2.5rem; }
+            .hero { padding: 60px 0; }
+            .section { padding: 60px 0; }
+            .section-title { font-size: 2rem; }
         }
     </style>
 </head>
@@ -697,16 +628,18 @@
     
     <!-- Navigation Menu -->
     <button id="menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
+        <div class="hamburger-box">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </button>
     <nav id="main-nav">
         <button id="nav-close-btn">×</button>
         <ul class="nav-links">
-            <li><a href="#home" id="nav-home">Home</a></li>
+            <li><a href="#home">Home</a></li>
             <li><a href="appstore">Appstore</a></li>
-            <li><a href="#contact" id="nav-contact">Contact</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
@@ -745,7 +678,6 @@
                 </ul>
             </div>
         </div>
-
     </header>
 
     <main>
@@ -832,8 +764,6 @@
     </footer>
 
     <!-- WIDGETS -->
-    
-    <!-- Buy Me a Coffee Widget -->
     <img src="images/bmac.png" alt="Buy Me a Coffee" id="bmac-trigger-icon">
     <div id="bmac-card">
         <div class="bmac-close">×</div>
@@ -841,8 +771,6 @@
         <p class="bmac-expanded-text">Enjoying my work? Consider supporting it with a coffee!</p>
         <a href="coffee" target="_blank" class="btn">Sure!</a>
     </div>
-
-    <!-- Music Player Widget -->
     <div id="music-trigger-icon">
         <i class="fas fa-play"></i>
     </div>
@@ -863,7 +791,6 @@
     </div>
     <audio id="bg-audio" src="music/bg-music.mp3"></audio>
 
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- Navigation Menu Logic ---
@@ -872,42 +799,34 @@
             const navCloseBtn = document.getElementById('nav-close-btn');
             const navLinks = mainNav.querySelectorAll('a');
 
-            function openNav() {
-                mainNav.classList.add('is-open');
-            }
-            function closeNav() {
-                mainNav.classList.remove('is-open');
-            }
+            function openNav() { mainNav.classList.add('is-open'); }
+            function closeNav() { mainNav.classList.remove('is-open'); }
 
             menuToggle.addEventListener('click', openNav);
             navCloseBtn.addEventListener('click', closeNav);
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
-                    // Smooth scroll for internal links
-                    if (link.hash) {
-                         e.preventDefault();
-                         const targetId = link.getAttribute('href');
-                         const targetElement = document.querySelector(targetId);
-                         if(targetElement) {
-                             targetElement.scrollIntoView({ behavior: 'smooth' });
-                         }
+                    if (link.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = link.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
                     }
-                    closeNav(); // Close nav after any link is clicked
+                    closeNav();
                 });
             });
-
 
             // --- Buy Me a Coffee Widget Logic ---
             const bmacTriggerIcon = document.getElementById('bmac-trigger-icon');
             const bmacCard = document.getElementById('bmac-card');
             const bmacCloseBtn = bmacCard.querySelector('.bmac-close');
-
             bmacTriggerIcon.addEventListener('click', () => {
                 bmacCard.classList.add('is-visible');
                 bmacTriggerIcon.style.opacity = '0';
                 bmacTriggerIcon.style.pointerEvents = 'none';
             });
-
             bmacCloseBtn.addEventListener('click', () => {
                 bmacCard.classList.remove('is-visible');
                 bmacTriggerIcon.style.opacity = '1';
@@ -927,25 +846,18 @@
             const totalDurationEl = document.getElementById('total-duration');
             
             function togglePlay() {
-                if (audio.paused) {
-                    audio.play();
-                } else {
-                    audio.pause();
-                }
+                if (audio.paused) { audio.play(); } else { audio.pause(); }
             }
-
             function updateIcons() {
                 const icon = audio.paused ? 'fa-play' : 'fa-pause';
                 musicTriggerIcon.innerHTML = `<i class="fas ${icon}"></i>`;
                 playPauseBtn.innerHTML = `<i class="fas ${icon}"></i>`;
             }
-
             function formatTime(seconds) {
                 const minutes = Math.floor(seconds / 60);
                 const secs = Math.floor(seconds % 60);
                 return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
             }
-
             musicTriggerIcon.addEventListener('click', () => {
                 togglePlay();
                 if (!musicCard.classList.contains('is-visible')) {
@@ -954,51 +866,34 @@
                     musicTriggerIcon.style.pointerEvents = 'none';
                 }
             });
-
             playPauseBtn.addEventListener('click', togglePlay);
-            
             audio.addEventListener('play', updateIcons);
             audio.addEventListener('pause', updateIcons);
-
             musicCloseBtn.addEventListener('click', () => {
                 musicCard.classList.remove('is-visible');
                 musicTriggerIcon.style.opacity = '1';
                 musicTriggerIcon.style.pointerEvents = 'auto';
             });
-            
-            rewindBtn.addEventListener('click', () => {
-                audio.currentTime -= 10;
-            });
-            
-            forwardBtn.addEventListener('click', () => {
-                audio.currentTime += 10;
-            });
-            
+            rewindBtn.addEventListener('click', () => { audio.currentTime -= 10; });
+            forwardBtn.addEventListener('click', () => { audio.currentTime += 10; });
             audio.addEventListener('loadedmetadata', () => {
                 totalDurationEl.textContent = formatTime(audio.duration);
                 timeline.max = audio.duration;
             });
-            
             audio.addEventListener('timeupdate', () => {
                 currentTimeEl.textContent = formatTime(audio.currentTime);
                 timeline.value = audio.currentTime;
             });
-            
-            timeline.addEventListener('input', () => {
-                audio.currentTime = timeline.value;
-            });
+            timeline.addEventListener('input', () => { audio.currentTime = timeline.value; });
 
             // --- My Skills Accordion Logic ---
             const skillsToggle = document.getElementById('skills-toggle');
             const skillsContent = document.getElementById('skills-content');
-
             skillsToggle.addEventListener('click', () => {
                 skillsToggle.classList.toggle('active');
                 if (skillsContent.style.maxHeight) {
-                    // If it's open, close it
                     skillsContent.style.maxHeight = null;
                 } else {
-                    // If it's closed, open it and set max-height to its scroll height
                     skillsContent.style.maxHeight = skillsContent.scrollHeight + 'px';
                 }
             });
