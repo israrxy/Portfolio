@@ -2,107 +2,404 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Md Israr Ahamed's Store</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="A cute and modern notes application with offline support, designed for mobile.">
+    <meta name="theme-color" content="#f8c8dc">
+    <title>Cutie Notes</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+
     <style>
         :root {
-            --primary-color: #667eea;
-            --secondary-color: #764ba2;
-            --card-bg: rgba(255, 255, 255, 0.1);
-            --text-color: #ffffff;
-            --shadow-color: rgba(0, 0, 0, 0.25);
+            --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            
+            /* --- Brand Colors --- */
+            --brand-pink: #F8C8DC;
+            --brand-pink-text: #2f2f3e; /* Darker text for readability on pink */
+            
+            /* --- Light Theme --- */
+            --bg-primary-light: #FFF8F0;
+            --bg-secondary-light: #FFFFFF;
+            --text-primary-light: #5C4B51;
+            --text-secondary-light: #A2999E;
+            --border-light: #F0E8E1;
+            --danger-light: #FF8A80;
+            --shadow-light: rgba(92, 75, 81, 0.1);
+
+            /* --- IMPROVED: Softer, Modern "Midnight" Dark Theme --- */
+            --bg-primary-dark: #2c2b3c; /* Dark Slate Blue */
+            --bg-secondary-dark: #38374a; /* Slightly lighter Slate */
+            --text-primary-dark: #f0f0f5; /* Off-white for softer text */
+            --text-secondary-dark: #a0a0b8; /* Muted lavender for secondary text */
+            --border-dark: #4b4a5f;
+            --danger-dark: #E57373;
+            --shadow-dark: rgba(0, 0, 0, 0.25);
+
+            /* --- Mapped to current theme --- */
+            --bg-primary: var(--bg-primary-light);
+            --bg-secondary: var(--bg-secondary-light);
+            --text-primary: var(--text-primary-light);
+            --text-secondary: var(--text-secondary-light);
+            --border-color: var(--border-light);
+            --danger-color: var(--danger-light);
+            --shadow-color: var(--shadow-light);
+            --accent-primary: var(--brand-pink);
+            --accent-text-color: var(--brand-pink-text);
+
+            --border-radius-sm: 12px;
+            --border-radius-md: 20px;
+            --transition-speed: 0.3s ease;
+            --safe-area-inset-top: env(safe-area-inset-top);
+            --safe-area-inset-bottom: env(safe-area-inset-bottom);
         }
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: var(--text-color);
-            min-height: 100vh;
+        [data-theme="dark"] {
+            --bg-primary: var(--bg-primary-dark);
+            --bg-secondary: var(--bg-secondary-dark);
+            --text-primary: var(--text-primary-dark);
+            --text-secondary: var(--text-secondary-dark);
+            --border-color: var(--border-dark);
+            --danger-color: var(--danger-dark);
+            --shadow-color: var(--shadow-dark);
         }
-        .store-container { max-width: 600px; margin: 0 auto; }
-        .store-header { text-align: center; margin-bottom: 40px; }
-        .profile-pic { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--text-color); margin-bottom: 15px; }
-        h1 { font-size: 2.2em; margin: 0; }
-        .app-list { display: flex; flex-direction: column; gap: 20px; }
-        .app-item-link { text-decoration: none; color: inherit; display: block; }
-        .app-item-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-        .app-item-link:hover .app-item-card {
-            transform: scale(1.03);
-            background: rgba(255, 255, 255, 0.2);
-        }
-        .app-icon { width: 65px; height: 65px; border-radius: 16px; flex-shrink: 0; }
-        .app-info h2 { margin: 0 0 4px 0; font-size: 1.5em; }
-        .app-info p { margin: 0; opacity: 0.8; }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        html, body { height: 100%; overflow: hidden; }
+        body { font-family: var(--font-family); background-color: var(--bg-primary); color: var(--text-primary); transition: background-color var(--transition-speed), color var(--transition-speed); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .app-container { width: 100%; position: relative; overflow: hidden; }
+        .view { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-primary); display: flex; flex-direction: column; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); }
+        .view.active-view { transform: translateX(0); }
+        #notes-list-view { transform: translateX(0); }
+        #note-editor-view.active-view ~ #notes-list-view { transform: translateX(-100%); }
+        .view-header { padding: 15px 20px; padding-top: calc(15px + var(--safe-area-inset-top)); display: flex; align-items: center; justify-content: space-between; background-color: var(--bg-secondary); border-bottom: 1px solid var(--border-color); flex-shrink: 0; }
+        .app-branding { display: flex; align-items: center; gap: 12px; }
+        .app-branding img { width: 32px; height: 32px; border-radius: 8px; }
+        .view-title { font-size: 22px; font-weight: 700; }
+        .header-actions { display: flex; align-items: center; gap: 8px; }
+        .search-container { padding: 10px 20px; background-color: var(--bg-primary); }
+        #search-bar { width: 100%; padding: 14px 20px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-secondary); color: var(--text-primary); font-size: 16px; -webkit-appearance: none; }
+        .category-tabs { display: flex; padding: 5px 20px; gap: 10px; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; }
+        .category-tabs::-webkit-scrollbar { display: none; }
+        .category-tab { padding: 8px 16px; border-radius: var(--border-radius-sm); font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; background-color: var(--bg-secondary); border: 1px solid var(--border-color); transition: all var(--transition-speed); }
+        .category-tab.active { background-color: var(--accent-primary); color: var(--accent-text-color); border-color: var(--accent-primary); }
+        .notes-list-container { flex: 1; overflow-y: auto; padding: 15px 20px; padding-bottom: calc(125px + var(--safe-area-inset-bottom)); }
+        .note-card { background-color: var(--bg-secondary); border-radius: var(--border-radius-md); padding: 20px; margin-bottom: 15px; border: 1px solid var(--border-color); box-shadow: 0 5px 15px var(--shadow-color); }
+        .note-card-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .note-card-excerpt { font-size: 14px; color: var(--text-secondary); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 12px; }
+        .note-card-date { font-size: 12px; color: var(--text-secondary); }
+        .empty-state { text-align: center; margin-top: 80px; color: var(--text-secondary); }
+        #new-note-fab { position: fixed; bottom: calc(55px + var(--safe-area-inset-bottom)); right: 25px; width: 60px; height: 60px; border-radius: 50%; background-color: var(--accent-primary); color: var(--accent-text-color); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0,0,0,0.2); border: none; cursor: pointer; z-index: 100; }
+        .editor-container { flex: 1; padding: 20px; display: flex; flex-direction: column; overflow-y: auto; padding-bottom: calc(20px + var(--safe-area-inset-bottom)); }
+        #note-title-input { border: none; background: none; font-size: 28px; font-weight: 700; color: var(--text-primary); width: 100%; padding: 8px 0; margin-bottom: 16px; -webkit-appearance: none; border-bottom: 1px solid var(--border-color); }
+        #note-title-input:focus { outline: none; }
+        #note-category-select { -webkit-appearance: none; border: 1px solid var(--border-color); background-color: var(--bg-secondary); color: var(--text-primary); padding: 10px 15px; border-radius: var(--border-radius-sm); font-size: 16px; margin-bottom: 20px; }
+        #rich-text-editor-toolbar { margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; display: flex; gap: 8px; }
+        .toolbar-button { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); width: 44px; height: 44px; cursor: pointer; font-size: 18px; font-weight: bold; color: var(--text-primary); }
+        .toolbar-button.active { background: var(--accent-primary); color: var(--accent-text-color); border-color: var(--accent-primary); }
+        #note-content-input { flex: 1; font-size: 17px; line-height: 1.7; color: var(--text-primary); min-height: 200px; }
+        #note-content-input:focus { outline: none; }
+        .note-metadata { margin-top: 24px; font-size: 12px; text-align: center; color: var(--text-secondary); }
+        .icon-button { background: none; border: none; cursor: pointer; color: var(--text-primary); padding: 8px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+        .icon-button.danger { color: var(--danger-color); }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease; }
+        .modal-overlay.visible { opacity: 1; visibility: visible; }
+        .modal-content { background-color: var(--bg-secondary); padding: 24px; border-radius: var(--border-radius-md); width: 90%; max-width: 320px; text-align: center; transform: scale(0.9); transition: transform 0.3s ease; }
+        .modal-overlay.visible .modal-content { transform: scale(1); }
+        .modal-content p { font-size: 18px; margin-bottom: 24px; }
+        .modal-actions { display: flex; justify-content: center; gap: 12px; }
+        .modal-button { padding: 12px 20px; flex: 1; border-radius: var(--border-radius-sm); border: none; font-size: 16px; font-weight: 600; cursor: pointer; }
+        .button-danger { background-color: var(--danger-color); color: #fff; }
+        .button-secondary { background-color: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border-color); }
+        .install-page-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-primary); z-index: 2000; display: none; flex-direction: column; justify-content: flex-start; align-items: center; padding: 0; padding-top: var(--safe-area-inset-top); padding-bottom: var(--safe-area-inset-bottom); overflow-y: auto; }
+        .install-page-content { width: 100%; max-width: 500px; }
+        .install-header { display: flex; align-items: center; gap: 16px; padding: 20px; }
+        .install-header .logo { width: 64px; height: 64px; border-radius: 16px; flex-shrink: 0; }
+        .install-header .app-meta { flex-grow: 1; }
+        .install-header h2 { font-size: 20px; font-weight: 600; margin: 0; }
+        .install-header p { font-size: 14px; color: var(--text-secondary); margin: 0; }
+        .install-button { background-color: var(--accent-primary); color: var(--accent-text-color); padding: 10px 24px; border-radius: 20px; font-weight: 600; border: none; cursor: pointer; white-space: nowrap; }
+        .install-button:disabled { background-color: var(--text-secondary); cursor: not-allowed; opacity: 0.5; }
+        .install-gallery { padding: 0 20px; display: flex; gap: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 12px; padding-bottom: 20px; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+        .install-gallery::-webkit-scrollbar { height: 6px; }
+        .install-gallery::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+        .install-gallery .screenshot { height: 300px; width: auto; border-radius: var(--border-radius-sm); }
+        .continue-link-container { text-align: center; padding: 20px; }
+        #continue-to-app-btn { background: none; border: none; color: var(--text-secondary); text-decoration: underline; cursor: pointer; font-size: 14px; }
+        .app-footer { position: fixed; bottom: 0; left: 0; right: 0; padding: 8px 15px; padding-bottom: calc(8px + var(--safe-area-inset-bottom)); background-color: var(--bg-secondary); border-top: 1px solid var(--border-color); text-align: center; font-size: 12px; color: var(--text-secondary); opacity: 0.9; z-index: 90; }
+        .app-footer a { color: var(--accent-primary); text-decoration: none; font-weight: 600; }
+        .app-footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
-    <div class="store-container">
-        <header class="store-header">
-            <!-- Image path is correct for this file location -->
-            <img src="images/pfp.png" alt="Md Israr Ahamed" class="profile-pic">
-            <h1>My App Store</h1>
-        </header>
 
-        <main class="app-list">
-            <!-- App 1: Peacify -->
-            <!-- This link points to the index.html INSIDE the peacify folder -->
-            <a href="peacify.pdf" class="app-item-link">
-                <article class="app-item-card">
-                    <img src="images/pcy-icon.png" alt="Peacify Icon" class="app-icon">
-                    <div class="app-info">
-                        <h2>Peacify</h2>
-                        <p>Music Without Limits</p>
-                    </div>
-                </article>
-            </a>
-
-            <a href="https://titled.site/grindgo" class="app-item-link">
-                <article class="app-item-card">
-                    <img src="images/grindgo-icon.png" alt="New App Icon" class="app-icon">
-                    <div class="app-info">
-                        <h2>GrindGO</h2>
-                        <p>A free  Ai calorie tracker</p>
-                    </div>
-                </article>
-            </a>
-
-            <a href="cutienotes.pdf" class="app-item-link">
-                <article class="app-item-card">
-                    <img src="images/icon-512.png" alt="Cutie Notes" class="app-icon">
-                    <div class="app-info">
-                        <h2>Cutie Notes</h2>
-                        <p>Cute and pookie notes app 🎀</p>
-                    </div>
-                </article>
-            </a>
-
-            <!-- To add a new app, create a new folder (e.g., "newapp") and copy this block -->
-            <!--
-            <a href="newapp/index.html" class="app-item-link">
-                <article class="app-item-card">
-                    <img src="images/newapp-icon.png" alt="New App Icon" class="app-icon">
-                    <div class="app-info">
-                        <h2>New App</h2>
-                        <p>A cool new project</p>
-                    </div>
-                </article>
-            </a>
-            -->
-        </main>
+    <div class="app-container" style="display: none;"> <!-- Hidden by default, JS will show it -->
+        <!-- Main App Views -->
+        <section id="notes-list-view" class="view active-view">
+            <header class="view-header">
+                <div class="app-branding">
+                    <img src="images/icon-192.png" alt="Cutie Notes Logo">
+                    <h1 class="view-title">Cutie Notes</h1>
+                </div>
+                <div class="header-actions">
+                    <button id="theme-switcher" class="icon-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    </button>
+                </div>
+            </header>
+            <div class="search-container"><input type="search" id="search-bar" placeholder="Search notes..."></div>
+            <div id="category-tabs" class="category-tabs">
+                <button class="category-tab active" data-category="all">All</button>
+                <button class="category-tab" data-category="personal">Personal</button>
+                <button class="category-tab" data-category="work">Work</button>
+                <button class="category-tab" data-category="ideas">Ideas</button>
+            </div>
+            <div id="notes-list-container" class="notes-list-container">
+                <div id="empty-notes-message" class="empty-state"><p>No notes yet. Tap the + to create one!</p></div>
+                <!-- Note cards will be injected here by JS -->
+            </div>
+            <footer class="app-footer">
+                Made with 💝 by <a href="https://israrxy.is-a.dev" target="_blank" rel="noopener noreferrer">Md Israr Ahamed</a>
+            </footer>
+            <button id="new-note-fab" aria-label="New Note">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+        </section>
+        <section id="note-editor-view" class="view">
+            <header class="view-header">
+                <button id="back-to-list-btn" class="icon-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <div class="header-actions">
+                    <button id="delete-note-btn" class="icon-button danger" style="display: none;">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    </button>
+                    <button id="save-note-btn" class="icon-button">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                    </button>
+                </div>
+            </header>
+            <div class="editor-container">
+                <input type="text" id="note-title-input" placeholder="Note Title">
+                <select id="note-category-select">
+                    <option value="personal">Personal</option>
+                    <option value="work">Work</option>
+                    <option value="ideas">Ideas</option>
+                </select>
+                <div id="rich-text-editor-toolbar">
+                    <button class="toolbar-button" data-command="bold">B</button>
+                    <button class="toolbar-button" data-command="italic">I</button>
+                    <button class="toolbar-button" data-command="insertUnorderedList">•</button>
+                </div>
+                <div id="note-content-input" contenteditable="true" data-placeholder="Start writing..."></div>
+                <div id="note-metadata" class="note-metadata"></div>
+            </div>
+        </section>
     </div>
+
+    <!-- ===== Modals and Overlays ===== -->
+    <div id="confirmation-modal" class="modal-overlay">
+        <div class="modal-content">
+            <p id="modal-text">Are you sure?</p>
+            <div class="modal-actions">
+                <button id="modal-cancel-btn" class="modal-button button-secondary">Cancel</button>
+                <button id="modal-confirm-btn" class="modal-button button-danger">Confirm</button>
+            </div>
+        </div>
+    </div>
+    <div id="install-page" class="install-page-overlay">
+        <div class="install-page-content">
+            <header class="install-header">
+                <img src="images/icon-192.png" alt="Cutie Notes Logo" class="logo">
+                <div class="app-meta">
+                    <h2>Cutie Notes</h2>
+                    <p>Productivity</p>
+                </div>
+                <button id="install-button" class="install-button" disabled>Install</button>
+            </header>
+            <div class="install-gallery">
+                <img src="images/screenshot-list.png" alt="Screenshot of the notes list" class="screenshot">
+                <img src="images/screenshot-editor.png" alt="Screenshot of the note editor" class="screenshot">
+            </div>
+            <div class="continue-link-container">
+                <button id="continue-to-app-btn">Continue to App →</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // (JavaScript block is now updated with the rendering fix)
+        const DB_NAME = 'CutieNotesDB', DB_VERSION = 1, STORE_NAME = 'notes';
+        let db;
+        const initDB = () => new Promise((resolve, reject) => {
+            if (db) return resolve(db);
+            const request = indexedDB.open(DB_NAME, DB_VERSION);
+            request.onerror = () => reject('Error opening database.');
+            request.onsuccess = (event) => { db = event.target.result; resolve(db); };
+            request.onupgradeneeded = (event) => {
+                const store = event.target.result.createObjectStore(STORE_NAME, { keyPath: 'id' });
+                store.createIndex('timestamp', 'timestamp', { unique: false });
+            };
+        });
+        const saveNoteToDB = (note) => new Promise(async (res, rej) => { const tx = (await initDB()).transaction(STORE_NAME, 'readwrite'); tx.objectStore(STORE_NAME).put(note); tx.oncomplete = () => res(); tx.onerror = () => rej('Error saving note.'); });
+        const getAllNotesFromDB = () => new Promise(async (res, rej) => { const req = (await initDB()).transaction(STORE_NAME, 'readonly').objectStore(STORE_NAME).getAll(); req.onsuccess = () => res(req.result); req.onerror = () => rej('Error fetching notes.'); });
+        const deleteNoteFromDB = (id) => new Promise(async (res, rej) => { const tx = (await initDB()).transaction(STORE_NAME, 'readwrite'); tx.objectStore(STORE_NAME).delete(id); tx.oncomplete = () => res(); tx.onerror = () => rej('Error deleting note.'); });
+        document.addEventListener('DOMContentLoaded', () => {
+            let deferredPrompt;
+            const state = { notes: [], activeCategory: 'all', activeNoteId: null };
+            const DOMElements = {
+                appContainer: document.querySelector('.app-container'),
+                notesListView: document.getElementById('notes-list-view'),
+                noteEditorView: document.getElementById('note-editor-view'),
+                newNoteFab: document.getElementById('new-note-fab'),
+                themeSwitcher: document.getElementById('theme-switcher'),
+                backToListBtn: document.getElementById('back-to-list-btn'),
+                saveNoteBtn: document.getElementById('save-note-btn'),
+                deleteNoteBtn: document.getElementById('delete-note-btn'),
+                notesListContainer: document.getElementById('notes-list-container'),
+                categoryTabs: document.getElementById('category-tabs'),
+                noteTitleInput: document.getElementById('note-title-input'),
+                noteContentInput: document.getElementById('note-content-input'),
+                noteCategorySelect: document.getElementById('note-category-select'),
+                noteMetadata: document.getElementById('note-metadata'),
+                searchBar: document.getElementById('search-bar'),
+                emptyNotesMessage: document.getElementById('empty-notes-message'),
+                deleteConfirmationModal: document.getElementById('confirmation-modal'),
+                modalText: document.getElementById('modal-text'),
+                modalConfirmBtn: document.getElementById('modal-confirm-btn'),
+                modalCancelBtn: document.getElementById('modal-cancel-btn'),
+                toolbar: document.getElementById('rich-text-editor-toolbar'),
+                installPage: document.getElementById('install-page'),
+                installButton: document.getElementById('install-button'),
+                continueToAppBtn: document.getElementById('continue-to-app-btn'),
+            };
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                DOMElements.installButton.disabled = false;
+            });
+            const handleInstall = async () => {
+                if (!deferredPrompt) return;
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                }
+                deferredPrompt = null;
+                hideInstallPageAndShowApp();
+            };
+            const hideInstallPageAndShowApp = () => {
+                DOMElements.installPage.style.display = 'none';
+                DOMElements.appContainer.style.display = 'block';
+                if (window.location.search.includes('install=true')) {
+                    history.replaceState(null, '', window.location.pathname);
+                }
+            };
+            const generateId = () => `note_${new Date().getTime()}`;
+            const formatTimestamp = (ts) => ts ? new Date(ts).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+            const switchView = (viewId) => DOMElements.noteEditorView.classList.toggle('active-view', viewId === 'note-editor-view');
+            
+            // --- FIX: Correct rendering order for notes ---
+            const renderNotesList = () => {
+                const notesContainer = DOMElements.notesListContainer;
+                // Clear only the notes and the empty message, not the footer
+                Array.from(notesContainer.children).forEach(child => {
+                    if (child.classList.contains('note-card') || child.classList.contains('empty-state')) {
+                        notesContainer.removeChild(child);
+                    }
+                });
+
+                const searchTerm = DOMElements.searchBar.value.toLowerCase();
+                const tempDiv = document.createElement('div');
+                // The sort logic is correct (newest first), the rendering part was the issue.
+                const filteredNotes = state.notes.filter(note => (state.activeCategory === 'all' || note.category === state.activeCategory) && (!searchTerm || note.title.toLowerCase().includes(searchTerm) || ((tempDiv.innerHTML = note.content), (tempDiv.textContent || "")).toLowerCase().includes(searchTerm))).sort((a, b) => b.timestamp - a.timestamp);
+                
+                if (filteredNotes.length === 0) {
+                    notesContainer.prepend(DOMElements.emptyNotesMessage); // Add empty message at the top
+                    DOMElements.emptyNotesMessage.style.display = 'block';
+                } else {
+                    DOMElements.emptyNotesMessage.style.display = 'none';
+                }
+
+                // We append to the container. Since the array is sorted newest to oldest, they will appear in that order.
+                filteredNotes.forEach(note => {
+                    const noteCard = document.createElement('div');
+                    noteCard.className = 'note-card';
+                    noteCard.dataset.noteId = note.id;
+                    tempDiv.innerHTML = note.content;
+                    const excerpt = (tempDiv.textContent || tempDiv.innerText || "").substring(0, 100);
+                    noteCard.innerHTML = `<h3 class="note-card-title">${note.title || 'Untitled Note'}</h3><p class="note-card-excerpt">${excerpt}</p><p class="note-card-date">${formatTimestamp(note.timestamp)}</p>`;
+                    noteCard.addEventListener('click', () => handleEditNote(note.id));
+                    notesContainer.appendChild(noteCard); // USE APPENDCHILD HERE
+                });
+            };
+
+            const populateEditor = (note) => {
+                state.activeNoteId = note.id;
+                DOMElements.noteTitleInput.value = note.title;
+                DOMElements.noteContentInput.innerHTML = note.content;
+                DOMElements.noteCategorySelect.value = note.category;
+                DOMElements.noteMetadata.textContent = `Last updated: ${new Date(note.timestamp).toLocaleString()}`;
+                DOMElements.deleteNoteBtn.style.display = 'flex';
+                updateToolbar();
+            };
+            const clearEditor = () => {
+                state.activeNoteId = null;
+                DOMElements.noteTitleInput.value = '';
+                DOMElements.noteContentInput.innerHTML = '';
+                DOMElements.noteCategorySelect.value = 'personal';
+                DOMElements.noteMetadata.textContent = '';
+                DOMElements.deleteNoteBtn.style.display = 'none';
+                updateToolbar();
+            };
+            const handleNewNote = () => { clearEditor(); switchView('note-editor-view'); DOMElements.noteTitleInput.focus(); };
+            const handleEditNote = (noteId) => { const note = state.notes.find(n => n.id === noteId); if (note) { populateEditor(note); switchView('note-editor-view'); } };
+            const handleSaveNote = async () => { if (!state.activeNoteId && !DOMElements.noteTitleInput.value && !DOMElements.noteContentInput.innerText) { switchView('notes-list-view'); return; } const noteData = { id: state.activeNoteId || generateId(), title: DOMElements.noteTitleInput.value.trim() || 'Untitled Note', content: DOMElements.noteContentInput.innerHTML, category: DOMElements.noteCategorySelect.value, timestamp: new Date().getTime(), }; await saveNoteToDB(noteData); await loadNotes(); };
+            const handleDeleteNote = () => { if (state.activeNoteId) { showDeleteModal('Permanently delete this note?', async () => { await deleteNoteFromDB(state.activeNoteId); await loadNotes(); switchView('notes-list-view'); }); } };
+            const handleCategoryChange = (e) => { const target = e.target.closest('.category-tab'); if (target) { DOMElements.categoryTabs.querySelector('.active').classList.remove('active'); target.classList.add('active'); state.activeCategory = target.dataset.category; renderNotesList(); } };
+            const handleThemeToggle = () => { const root = document.documentElement; const newTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; root.setAttribute('data-theme', newTheme); localStorage.setItem('theme', newTheme); document.querySelector('meta[name="theme-color"]').setAttribute('content', getComputedStyle(root).getPropertyValue('--accent-primary').trim()); };
+            let confirmDeleteCallback = null;
+            const showDeleteModal = (text, onConfirm) => { DOMElements.modalText.textContent = text; confirmDeleteCallback = onConfirm; DOMElements.deleteConfirmationModal.classList.add('visible'); };
+            const hideDeleteModal = () => { DOMElements.deleteConfirmationModal.classList.remove('visible'); confirmDeleteCallback = null; };
+            const confirmDelete = () => { if (confirmDeleteCallback) confirmDeleteCallback(); hideDeleteModal(); };
+            const updateToolbar = () => DOMElements.toolbar.querySelectorAll('.toolbar-button').forEach(btn => btn.classList.toggle('active', document.queryCommandState(btn.dataset.command)));
+            const handleToolbarClick = (e) => { const button = e.target.closest('.toolbar-button'); if (button) { document.execCommand(button.dataset.command, false, null); button.classList.toggle('active'); DOMElements.noteContentInput.focus(); } };
+            const createWelcomeNote = async () => { const welcomeNote = { id: 'welcome-note', title: 'Welcome to Cutie Notes! 🌸', content: `<p>Hello there! This is your very first note. Here are a few tips to get you started:</p><ul><li>Tap the <b>big pink plus button</b> to create a new note.</li><li>Use the <b>toolbar above</b> to make your text <b>bold</b>, <i>italic</i>, or create lists.</li><li>Give your note a title and choose a category.</li><li>To delete this note, open it, and tap the trash icon in the top right.</li></ul><p>Happy note-taking!</p>`, category: 'personal', timestamp: new Date().getTime() }; await saveNoteToDB(welcomeNote); return welcomeNote; };
+            const loadNotes = async () => { try { let notes = await getAllNotesFromDB(); if (notes.length === 0) { const welcomeNote = await createWelcomeNote(); notes.push(welcomeNote); } state.notes = notes; renderNotesList(); } catch (error) { console.error('Failed to load notes:', error); } };
+            const setupEventListeners = () => {
+                DOMElements.installButton.addEventListener('click', handleInstall);
+                DOMElements.continueToAppBtn.addEventListener('click', hideInstallPageAndShowApp);
+                DOMElements.newNoteFab.addEventListener('click', handleNewNote);
+                DOMElements.saveNoteBtn.addEventListener('click', async () => { await handleSaveNote(); switchView('notes-list-view'); });
+                DOMElements.deleteNoteBtn.addEventListener('click', handleDeleteNote);
+                DOMElements.backToListBtn.addEventListener('click', async () => { await handleSaveNote(); switchView('notes-list-view'); });
+                DOMElements.categoryTabs.addEventListener('click', handleCategoryChange);
+                DOMElements.searchBar.addEventListener('input', renderNotesList);
+                DOMElements.themeSwitcher.addEventListener('click', handleThemeToggle);
+                DOMElements.modalConfirmBtn.addEventListener('click', confirmDelete);
+                DOMElements.modalCancelBtn.addEventListener('click', hideDeleteModal);
+                DOMElements.toolbar.addEventListener('click', handleToolbarClick);
+                DOMElements.noteContentInput.addEventListener('keyup', updateToolbar);
+                DOMElements.noteContentInput.addEventListener('mouseup', updateToolbar);
+            };
+            const init = () => {
+                DOMElements.appContainer.style.height = `${window.innerHeight}px`;
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--accent-primary').trim());
+                const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+                const urlParams = new URLSearchParams(window.location.search);
+                if (isStandalone) {
+                    DOMElements.appContainer.style.display = 'block';
+                } else if (urlParams.has('install')) {
+                    DOMElements.installPage.style.display = 'flex';
+                } else {
+                    window.location.href = window.location.pathname + '?install=true';
+                    return;
+                }
+                setupEventListeners();
+                loadNotes();
+                if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js').then(reg => console.log('Service worker registered.', reg)).catch(err => console.error('Service worker registration failed:', err)); }); }
+            };
+            init();
+        });
+    </script>
 </body>
 </html>
