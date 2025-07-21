@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Font Previewer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Oswald:wght@400;700&family=Source+Code+Pro:wght@400;700&family=Slabo+27px&family=Raleway:wght@400;700&family=PT+Sans:wght@400;700&family=Merriweather:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Playfair+Display:wght@400;700&family=Nunito:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Work+Sans:wght@400;700&family=Poppins:wght@400;700&family=DM+Sans:wght@400;700&family=Eczar:wght@400;700&family=Alegreya:wght@400;700&family=Gelasio:wght@400;700&family=Cinzel+Decorative:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #1c1e21;
+            margin-bottom: 1rem;
+        }
+
+        #input-text {
+            width: 80%;
+            max-width: 600px;
+            padding: 1rem;
+            font-size: 1.2rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #font-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .font-preview {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .font-preview:hover {
+            transform: translateY(-5px);
+        }
+
+        .font-label {
+            font-size: 0.9rem;
+            color: #606770;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .font-display {
+            font-size: 2rem;
+            overflow-wrap: break-word;
+        }
+
+        /* Font Styles */
+        .roboto { font-family: 'Roboto', sans-serif; }
+        .open-sans { font-family: 'Open Sans', sans-serif; }
+        .lato { font-family: 'Lato', sans-serif; }
+        .montserrat { font-family: 'Montserrat', sans-serif; }
+        .oswald { font-family: 'Oswald', sans-serif; }
+        .source-code-pro { font-family: 'Source Code Pro', monospace; }
+        .slabo-27px { font-family: 'Slabo 27px', serif; }
+        .raleway { font-family: 'Raleway', sans-serif; }
+        .pt-sans { font-family: 'PT Sans', sans-serif; }
+        .merriweather { font-family: 'Merriweather', serif; }
+        .noto-sans-jp { font-family: 'Noto Sans JP', sans-serif; }
+        .playfair-display { font-family: 'Playfair Display', serif; }
+        .nunito { font-family: 'Nunito', sans-serif; }
+        .cormorant-garamond { font-family: 'Cormorant Garamond', serif; }
+        .work-sans { font-family: 'Work Sans', sans-serif; }
+        .poppins { font-family: 'Poppins', sans-serif; }
+        .dm-sans { font-family: 'DM Sans', sans-serif; } [1]
+        .eczar { font-family: 'Eczar', serif; } [1]
+        .alegreya { font-family: 'Alegreya', serif; } [1]
+        .gelasio { font-family: 'Gelasio', serif; } [2]
+        .cinzel-decorative { font-family: 'Cinzel Decorative', cursive; } [3]
+    </style>
+</head>
+<body>
+
+    <h1>Modern Font Previewer</h1>
+
+    <input type="text" id="input-text" value="Hello World!">
+
+    <div id="font-container">
+        <div class="font-preview">
+            <div class="font-label">Roboto</div>
+            <div class="font-display roboto">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Open Sans</div>
+            <div class="font-display open-sans">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Lato</div>
+            <div class="font-display lato">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Montserrat</div>
+            <div class="font-display montserrat">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Oswald</div>
+            <div class="font-display oswald">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Source Code Pro</div>
+            <div class="font-display source-code-pro">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Slabo 27px</div>
+            <div class="font-display slabo-27px">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Raleway</div>
+            <div class="font-display raleway">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">PT Sans</div>
+            <div class="font-display pt-sans">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Merriweather</div>
+            <div class="font-display merriweather">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Noto Sans JP</div>
+            <div class="font-display noto-sans-jp">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Playfair Display</div>
+            <div class="font-display playfair-display">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Nunito</div>
+            <div class="font-display nunito">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Cormorant Garamond</div>
+            <div class="font-display cormorant-garamond">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Work Sans</div>
+            <div class="font-display work-sans">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Poppins</div>
+            <div class="font-display poppins">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">DM Sans</div>
+            <div class="font-display dm-sans">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Eczar</div>
+            <div class="font-display eczar">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Alegreya</div>
+            <div class="font-display alegreya">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Gelasio</div>
+            <div class="font-display gelasio">Hello World!</div>
+        </div>
+        <div class="font-preview">
+            <div class="font-label">Cinzel Decorative</div>
+            <div class="font-display cinzel-decorative">Hello World!</div>
+        </div>
+    </div>
+
+    <script>
+        const inputText = document.getElementById('input-text');
+        const fontDisplays = document.querySelectorAll('.font-display');
+
+        inputText.addEventListener('input', function() {
+            fontDisplays.forEach(display => {
+                display.textContent = this.value;
+            });
+        });
+    </script>
+
+</body>
+</html>
