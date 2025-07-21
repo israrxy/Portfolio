@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Font Previewer</title>
+    <title>Stylish Bio Text Generator</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Oswald:wght@400;700&family=Source+Code+Pro:wght@400;700&family=Slabo+27px&family=Raleway:wght@400;700&family=PT+Sans:wght@400;700&family=Merriweather:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Playfair+Display:wght@400;700&family=Nunito:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Work+Sans:wght@400;700&family=Poppins:wght@400;700&family=DM+Sans:wght@400;700&family=Eczar:wght@400;700&family=Alegreya:wght@400;700&family=Gelasio:wght@400;700&family=Cinzel+Decorative:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
-
         body {
-            font-family: 'Helvetica Neue', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f0f2f5;
-            color: #333;
+            color: #1c1e21;
             margin: 0;
             padding: 2rem;
             display: flex;
@@ -22,177 +20,159 @@
             font-size: 2.5rem;
             color: #1c1e21;
             margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        p {
+            color: #606770;
+            margin-bottom: 2rem;
+            text-align: center;
         }
 
         #input-text {
-            width: 80%;
-            max-width: 600px;
+            width: 90%;
+            max-width: 800px;
             padding: 1rem;
             font-size: 1.2rem;
             border: 1px solid #ddd;
             border-radius: 8px;
             margin-bottom: 2rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
-        #font-container {
+        #style-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 1.5rem;
             width: 90%;
             max-width: 1200px;
         }
 
-        .font-preview {
+        .style-preview {
             background-color: #fff;
             padding: 1.5rem;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .font-preview:hover {
+        .style-preview:hover {
             transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
-        .font-label {
-            font-size: 0.9rem;
+        .style-label {
+            font-size: 1rem;
             color: #606770;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             font-weight: bold;
         }
 
-        .font-display {
-            font-size: 2rem;
+        .style-output {
+            font-size: 1.8rem;
             overflow-wrap: break-word;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            min-height: 50px;
         }
 
-        /* Font Styles */
-        .roboto { font-family: 'Roboto', sans-serif; }
-        .open-sans { font-family: 'Open Sans', sans-serif; }
-        .lato { font-family: 'Lato', sans-serif; }
-        .montserrat { font-family: 'Montserrat', sans-serif; }
-        .oswald { font-family: 'Oswald', sans-serif; }
-        .source-code-pro { font-family: 'Source Code Pro', monospace; }
-        .slabo-27px { font-family: 'Slabo 27px', serif; }
-        .raleway { font-family: 'Raleway', sans-serif; }
-        .pt-sans { font-family: 'PT Sans', sans-serif; }
-        .merriweather { font-family: 'Merriweather', serif; }
-        .noto-sans-jp { font-family: 'Noto Sans JP', sans-serif; }
-        .playfair-display { font-family: 'Playfair Display', serif; }
-        .nunito { font-family: 'Nunito', sans-serif; }
-        .cormorant-garamond { font-family: 'Cormorant Garamond', serif; }
-        .work-sans { font-family: 'Work Sans', sans-serif; }
-        .poppins { font-family: 'Poppins', sans-serif; }
-        .dm-sans { font-family: 'DM Sans', sans-serif; } [1]
-        .eczar { font-family: 'Eczar', serif; } [1]
-        .alegreya { font-family: 'Alegreya', serif; } [1]
-        .gelasio { font-family: 'Gelasio', serif; } [2]
-        .cinzel-decorative { font-family: 'Cinzel Decorative', cursive; } [3]
+        .copy-btn {
+            background-color: #1877f2;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .copy-btn:hover {
+            background-color: #166fe5;
+        }
+
+        .copy-btn.copied {
+            background-color: #42b72a;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Modern Font Previewer</h1>
+    <h1>Stylish Text Generator for Bios</h1>
+    <p>Create a unique bio with these stylish text options. Type your text below and copy your favorite style.</p>
 
-    <input type="text" id="input-text" value="Hello World!">
+    <textarea id="input-text" rows="2" placeholder="Type your bio here..."></textarea>
 
-    <div id="font-container">
-        <div class="font-preview">
-            <div class="font-label">Roboto</div>
-            <div class="font-display roboto">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Open Sans</div>
-            <div class="font-display open-sans">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Lato</div>
-            <div class="font-display lato">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Montserrat</div>
-            <div class="font-display montserrat">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Oswald</div>
-            <div class="font-display oswald">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Source Code Pro</div>
-            <div class="font-display source-code-pro">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Slabo 27px</div>
-            <div class="font-display slabo-27px">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Raleway</div>
-            <div class="font-display raleway">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">PT Sans</div>
-            <div class="font-display pt-sans">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Merriweather</div>
-            <div class="font-display merriweather">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Noto Sans JP</div>
-            <div class="font-display noto-sans-jp">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Playfair Display</div>
-            <div class="font-display playfair-display">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Nunito</div>
-            <div class="font-display nunito">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Cormorant Garamond</div>
-            <div class="font-display cormorant-garamond">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Work Sans</div>
-            <div class="font-display work-sans">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Poppins</div>
-            <div class="font-display poppins">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">DM Sans</div>
-            <div class="font-display dm-sans">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Eczar</div>
-            <div class="font-display eczar">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Alegreya</div>
-            <div class="font-display alegreya">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Gelasio</div>
-            <div class="font-display gelasio">Hello World!</div>
-        </div>
-        <div class="font-preview">
-            <div class="font-label">Cinzel Decorative</div>
-            <div class="font-display cinzel-decorative">Hello World!</div>
-        </div>
-    </div>
+    <div id="style-container"></div>
 
     <script>
         const inputText = document.getElementById('input-text');
-        const fontDisplays = document.querySelectorAll('.font-display');
+        const styleContainer = document.getElementById('style-container');
 
-        inputText.addEventListener('input', function() {
-            fontDisplays.forEach(display => {
-                display.textContent = this.value;
-            });
-        });
+        const fonts = {
+            'Circled': { 'a': 'ⓐ', 'b': 'ⓑ', 'c': 'ⓒ', 'd': 'ⓓ', 'e': 'ⓔ', 'f': 'ⓕ', 'g': 'ⓖ', 'h': 'ⓗ', 'i': 'ⓘ', 'j': 'ⓙ', 'k': 'ⓚ', 'l': 'ⓛ', 'm': 'ⓜ', 'n': 'ⓝ', 'o': 'ⓞ', 'p': 'ⓟ', 'q': 'ⓠ', 'r': 'ⓡ', 's': 'ⓢ', 't': 'ⓣ', 'u': 'ⓤ', 'v': 'ⓥ', 'w': 'ⓦ', 'x': 'ⓧ', 'y': 'ⓨ', 'z': 'ⓩ' },
+            'Bold Script': { 'a': '𝐚', 'b': '𝐛', 'c': '𝐜', 'd': '𝐝', 'e': '𝐞', 'f': '𝐟', 'g': '𝐠', 'h': '𝐡', 'i': '𝐢', 'j': '𝐣', 'k': '𝐤', 'l': '𝐥', 'm': '𝐦', 'n': '𝐧', 'o': '𝐨', 'p': '𝐩', 'q': '𝐪', 'r': '𝐫', 's': '𝐬', 't': '𝐭', 'u': '𝐮', 'v': '𝐯', 'w': '𝐰', 'x': '𝐱', 'y': '𝐲', 'z': '𝐳' },
+            'Cursive': { 'a': '𝒶', 'b': '𝒷', 'c': '𝒸', 'd': '𝒹', 'e': '𝑒', 'f': '𝒻', 'g': '𝑔', 'h': '𝒽', 'i': '𝒾', 'j': '𝒿', 'k': '𝓀', 'l': '𝓁', 'm': '𝓂', 'n': '𝓃', 'o': '𝑜', 'p': '𝓅', 'q': '𝓆', 'r': '𝓇', 's': '𝓈', 't': '𝓉', 'u': '𝓊', 'v': '𝓋', 'w': '𝓌', 'x': '𝓍', 'y': '𝓎', 'z': '𝓏' },
+            'Old English': { 'a': '𝔞', 'b': '𝔟', 'c': '𝔠', 'd': '𝔡', 'e': '𝔢', 'f': '𝔣', 'g': '𝔤', 'h': '𝔥', 'i': '𝔦', 'j': '𝔧', 'k': '𝔨', 'l': '𝔩', 'm': '𝔪', 'n': '𝔫', 'o': '𝔬', 'p': '𝔭', 'q': '𝔮', 'r': '𝔯', 's': '𝔰', 't': '𝔱', 'u': '𝔲', 'v': '𝔳', 'w': '𝔴', 'x': '𝔵', 'y': '𝔶', 'z': '𝔷' },
+            'Monospace': { 'a': '𝚊', 'b': '𝚋', 'c': '𝚌', 'd': '𝚍', 'e': '𝚎', 'f': '𝚏', 'g': '𝚐', 'h': '𝚑', 'i': '𝚒', 'j': '𝚓', 'k': '𝚔', 'l': '𝚕', 'm': '𝚖', 'n': '𝚗', 'o': '𝚘', 'p': '𝚙', 'q': '𝚚', 'r': '𝚛', 's': '𝚜', 't': '𝚝', 'u': '𝚞', 'v': '𝚟', 'w': '𝚠', 'x': '𝚡', 'y': '𝚢', 'z': '𝚣' },
+            'Double Struck': { 'a': '𝕒', 'b': '𝕓', 'c': '𝕔', 'd': '𝕕', 'e': '𝕖', 'f': '𝕗', 'g': '𝕘', 'h': '𝕙', 'i': '𝕚', 'j': '𝕛', 'k': '𝕜', 'l': '𝕝', 'm': '𝕞', 'n': '𝕟', 'o': '𝕠', 'p': '𝕡', 'q': '𝕢', 'r': '𝕣', 's': '𝕤', 't': '𝕥', 'u': '𝕦', 'v': '𝕧', 'w': '𝕨', 'x': '𝕩', 'y': '𝕪', 'z': '𝕫' },
+            'Square': { 'a': '🄰', 'b': '🄱', 'c': '🄲', 'd': '🄳', 'e': '🄴', 'f': '🄵', 'g': '🄶', 'h': '🄷', 'i': '🄸', 'j': '🄹', 'k': '🄺', 'l': '🄻', 'm': '🄼', 'n': '🄽', 'o': '🄾', 'p': '🄿', 'q': '🅀', 'r': '🅁', 's': '🅂', 't': '🅃', 'u': '🅄', 'v': '🅅', 'w': '🅆', 'x': '🅇', 'y': '🅈', 'z': '🅉' },
+            'Fairy Tale': { 'a': 'α', 'b': 'в', 'c': '¢', 'd': '∂', 'e': 'є', 'f': 'ƒ', 'g': 'g', 'h': 'н', 'i': 'ι', 'j': 'נ', 'k': 'к', 'l': 'ℓ', 'm': 'м', 'n': 'η', 'o': 'σ', 'p': 'ρ', 'q': 'q', 'r': 'я', 's': 'ѕ', 't': 'т', 'u': 'υ', 'v': 'ν', 'w': 'ω', 'x': 'χ', 'y': 'у', 'z': 'z' },
+        };
+
+        function convertText(text, style) {
+            let converted = '';
+            const fontMap = fonts[style];
+            for (let char of text.toLowerCase()) {
+                converted += fontMap[char] || char;
+            }
+            return converted;
+        }
+
+        function renderStyles() {
+            styleContainer.innerHTML = '';
+            const text = inputText.value || inputText.placeholder;
+
+            for (const styleName in fonts) {
+                const stylePreview = document.createElement('div');
+                stylePreview.className = 'style-preview';
+
+                const styleLabel = document.createElement('div');
+                styleLabel.className = 'style-label';
+                styleLabel.textContent = styleName;
+
+                const styleOutput = document.createElement('div');
+                styleOutput.className = 'style-output';
+                styleOutput.textContent = convertText(text, styleName);
+
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'copy-btn';
+                copyBtn.textContent = 'Copy';
+                copyBtn.addEventListener('click', () => {
+                    navigator.clipboard.writeText(styleOutput.textContent).then(() => {
+                        copyBtn.textContent = 'Copied!';
+                        copyBtn.classList.add('copied');
+                        setTimeout(() => {
+                            copyBtn.textContent = 'Copy';
+                            copyBtn.classList.remove('copied');
+                        }, 1500);
+                    });
+                });
+
+                stylePreview.appendChild(styleLabel);
+                stylePreview.appendChild(styleOutput);
+                stylePreview.appendChild(copyBtn);
+                styleContainer.appendChild(stylePreview);
+            }
+        }
+
+        inputText.addEventListener('input', renderStyles);
+        window.addEventListener('load', renderStyles);
     </script>
 
 </body>
