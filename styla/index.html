@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styla (aka Stylaxy) - Text Generator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            margin: 0;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        #pfp {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1.5rem;
+            border: 3px solid #dee2e6;
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: #343a40;
+            margin: 0;
+        }
+
+        #subtitle {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-top: 0.25rem;
+        }
+
+        #input-text {
+            width: 90%;
+            max-width: 800px;
+            padding: 1rem;
+            font-size: 1.2rem;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .switch-container {
+            display: flex;
+            margin-bottom: 2rem;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        .switch-btn {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border: none;
+            background-color: transparent;
+            color: #6c757d;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .switch-btn.active {
+            background-color: #fff;
+            color: #007bff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #style-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .style-preview {
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .style-preview:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .style-label {
+            font-size: 0.9rem;
+            color: #495057;
+            margin-bottom: 0.8rem;
+            font-weight: bold;
+        }
+
+        .style-output {
+            font-size: 1.5rem;
+            overflow-wrap: break-word;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 1rem;
+            min-height: 40px;
+            color: #343a40;
+        }
+
+        .copy-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .copy-btn:hover {
+            background-color: #0069d9;
+        }
+
+        .copy-btn.copied {
+            background-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <img id="pfp" src="/images/pfp2.png" alt="Profile Picture">
+        <div class="header-text">
+            <h1>Styla (aka Stylaxy)</h1>
+            <p id="subtitle">Made by israrxy</p>
+        </div>
+    </header>
+
+    <textarea id="input-text" rows="2" placeholder="Type your text here..."></textarea>
+
+    <div class="switch-container">
+        <button class="switch-btn active" data-category="stylish">Stylish</button>
+        <button class="switch-btn" data-category="cute">Cute</button>
+    </div>
+
+    <div id="style-container"></div>
+
+    <script src="styles.js"></script>
+    <script>
+        const inputText = document.getElementById('input-text');
+        const styleContainer = document.getElementById('style-container');
+        const switchButtons = document.querySelectorAll('.switch-btn');
+
+        let currentCategory = 'stylish'; // Default category
+
+        function convertText(text, fontMap) {
+            let converted = '';
+            for (let char of text) {
+                const lowerChar = char.toLowerCase();
+                converted += fontMap[lowerChar] || char;
+            }
+            return converted;
+        }
+
+        function renderStyles() {
+            styleContainer.innerHTML = '';
+            const text = inputText.value || inputText.placeholder;
+            const fontList = fonts[currentCategory];
+
+            for (const styleName in fontList) {
+                const stylePreview = document.createElement('div');
+                stylePreview.className = 'style-preview';
+
+                const styleLabel = document.createElement('div');
+                styleLabel.className = 'style-label';
+                styleLabel.textContent = styleName;
+
+                const styleOutput = document.createElement('div');
+                styleOutput.className = 'style-output';
+                styleOutput.textContent = convertText(text, fontList[styleName]);
+
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'copy-btn';
+                copyBtn.textContent = 'Copy';
+                copyBtn.addEventListener('click', () => {
+                    navigator.clipboard.writeText(styleOutput.textContent).then(() => {
+                        copyBtn.textContent = 'Copied!';
+                        copyBtn.classList.add('copied');
+                        setTimeout(() => {
+                            copyBtn.textContent = 'Copy';
+                            copyBtn.classList.remove('copied');
+                        }, 1500);
+                    });
+                });
+
+                stylePreview.appendChild(styleLabel);
+                stylePreview.appendChild(styleOutput);
+                stylePreview.appendChild(copyBtn);
+                styleContainer.appendChild(stylePreview);
+            }
+        }
+
+        switchButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                document.querySelector('.switch-btn.active').classList.remove('active');
+                button.classList.add('active');
+
+                // Update category and re-render
+                currentCategory = button.dataset.category;
+                renderStyles();
+            });
+        });
+
+        inputText.addEventListener('input', renderStyles);
+        window.addEventListener('load', renderStyles);
+    </script>
+
+</body>
+</html>
