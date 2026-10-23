@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://israrxy.qzz.io/sitemap.xml

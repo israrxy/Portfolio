@@ -3,21 +3,130 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ISRAR // LOGIC ARCHITECT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Md Israr Ahamed (israrxy)">
+    <meta name="keywords" content="Israr Ahamed, Md Israr Ahamed, israrxy, Logic Architect, Raazi Music, Raazi Music Player, Zenim Android, Zenim Torrent Client, Android Developer, Jetpack Compose">
+    <title>Israr's Portfolio - Logic Architect</title>
+    <meta name="description" content="Official portfolio & Android app store of Md Israr Ahamed (israrxy), 17-year-old Logic Architect and creator of Raazi Music Player & Zenim Android.">
+    <link rel="canonical" href="https://israrxy.qzz.io/">
+
+    <!-- Google Search & Browser Favicons (Multiple sizes + .ico + Apple Touch + Manifest) -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/images/android-chrome-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- OpenGraph Social Sharing Cards -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Israr Ahamed · Logic Architect">
+    <meta property="og:title" content="Israr's Portfolio - Logic Architect">
+    <meta property="og:description" content="Official portfolio & Android app store of Md Israr Ahamed (israrxy), creator of Raazi Music Player (v6.0.0) & Zenim Android (v1.1.0).">
+    <meta property="og:url" content="https://israrxy.qzz.io/">
+    <meta property="og:image" content="https://israrxy.qzz.io/images/android-chrome-512x512.png">
+    <meta property="og:image:alt" content="Israr Ahamed - Logic Architect">
+
+    <!-- Twitter / X Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Israr's Portfolio - Logic Architect">
+    <meta name="twitter:description" content="Official portfolio & Android app store of Md Israr Ahamed (israrxy), creator of Raazi Music Player & Zenim Android.">
+    <meta name="twitter:image" content="https://israrxy.qzz.io/images/android-chrome-512x512.png">
+
+    <!-- Schema.org Structured Data (JSON-LD) for Google Rich Search Results -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://israrxy.qzz.io/#website",
+          "url": "https://israrxy.qzz.io/",
+          "name": "Israr's Portfolio - Logic Architect",
+          "alternateName": ["Israr Ahamed", "israrxy"],
+          "description": "Official portfolio and Android app hub of Md Israr Ahamed (israrxy), creator of Raazi Music Player and Zenim Android.",
+          "publisher": {
+            "@id": "https://israrxy.qzz.io/#person"
+          }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://israrxy.qzz.io/#person",
+          "name": "Md Israr Ahamed",
+          "alternateName": "israrxy",
+          "jobTitle": "Logic Architect & Indie Android Developer",
+          "url": "https://israrxy.qzz.io/",
+          "image": "https://israrxy.qzz.io/assets/avatar.png",
+          "email": "mailto:hi@israrxy.qzz.io",
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "West Bengal",
+            "addressCountry": "IN"
+          },
+          "sameAs": [
+            "https://github.com/israrxy",
+            "https://instagram.com/israrxy",
+            "https://raazi.pages.dev"
+          ]
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "Raazi Music Player",
+          "operatingSystem": "Android 8.0+",
+          "applicationCategory": "MultimediaApplication",
+          "softwareVersion": "6.0.0",
+          "fileSize": "18.5MB",
+          "downloadUrl": "https://raazi-music-player.en.uptodown.com/android",
+          "installUrl": "https://raazi.pages.dev",
+          "author": {
+            "@id": "https://israrxy.qzz.io/#person"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "description": "Privacy-first open-source Android music player built with Jetpack Compose, NewPipeExtractor, and Media3 ExoPlayer."
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "Zenim Android",
+          "operatingSystem": "Android 7.0+",
+          "applicationCategory": "MultimediaApplication",
+          "softwareVersion": "1.1.0",
+          "fileSize": "59.9MB",
+          "downloadUrl": "https://github.com/israrxy/zenim-android/releases/download/v1.1.0/zenim-v1.1.0.apk",
+          "author": {
+            "@id": "https://israrxy.qzz.io/#person"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "description": "A calm, Material 3 Expressive torrent client for Android that searches, downloads, and streams video/audio torrents in-app via libtorrent4j."
+        }
+      ]
+    }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
     <style>
         :root {
             --bg: #0a0a0a;
             --accent: #6366f1;
             --text: #ffffff;
+        }
+        html {
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
         }
         body {
             font-family: 'Space Grotesk', sans-serif;
@@ -28,11 +137,80 @@
         .mono { font-family: 'JetBrains Mono', monospace; }
         .syne { font-family: 'Syne', sans-serif; }
         
+        @keyframes grid-drift {
+            0% {
+                background-position: 0px 0px;
+            }
+            100% {
+                background-position: 40px 40px;
+            }
+        }
+
+        @keyframes orb-float-1 {
+            0%, 100% {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+            33% {
+                transform: translate3d(6vw, 8vh, 0) scale(1.12);
+            }
+            66% {
+                transform: translate3d(-4vw, 14vh, 0) scale(0.94);
+            }
+        }
+
+        @keyframes orb-float-2 {
+            0%, 100% {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+            50% {
+                transform: translate3d(-8vw, -10vh, 0) scale(1.15);
+            }
+        }
+
+        @keyframes beam-scan {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.5;
+            }
+            80% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
         .grid-bg {
             background-size: 40px 40px;
             background-image: 
-                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+                linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+            animation: grid-drift 3.5s linear infinite;
+        }
+
+        .motion-orb-indigo {
+            animation: orb-float-1 16s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .motion-orb-secondary {
+            animation: orb-float-2 20s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .motion-beam {
+            animation: beam-scan 10s linear infinite;
+            will-change: transform, opacity;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .grid-bg, .motion-orb-indigo, .motion-orb-secondary, .motion-beam {
+                animation: none !important;
+            }
         }
 
         .indie-card {
